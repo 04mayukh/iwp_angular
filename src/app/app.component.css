@@ -1,0 +1,40 @@
+.flex-spacer {
+    flex: 1 1 auto;
+  }
+
+.layout{
+    display: flex;
+    justify-content: space-between;
+}
+.side-nav{
+    background-color: #E8EAF6;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 100%;
+}
+.side-links{
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    width: 80%;
+    padding: 15px 60px;
+    border-radius: 40px;
+}
+.text{
+    margin-right: 10px;
+    font-size: 24px;
+}
+
+.user{
+    width: 100%;
+    background-color: #536DFE;
+}
+
+.nav-placer{
+    width: 20%;
+}
+.main-content{
+    width: 80%;
+}

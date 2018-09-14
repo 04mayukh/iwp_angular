@@ -1,0 +1,19 @@
+<div class="card-holder" *ngFor="let event of events">
+  <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h3>{{event.event_name | uppercase}}</h3>
+        </mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="{{event.image}}" alt={{event.event_name}}>
+      <mat-card-content>
+        <p>{{event.description}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>Register</button>
+        <span class="flex-spacer"></span>
+      </mat-card-actions>
+    </mat-card>
+</div>    
