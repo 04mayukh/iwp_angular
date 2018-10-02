@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Event } from '../shared/event'
+import { Event } from '../shared/event';
+import { FeedService } from '../services/feed.service';
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
@@ -7,28 +8,12 @@ import { Event } from '../shared/event'
 })
 export class FeedComponent implements OnInit {
 
-  events: Event[] = [
-    {
-      event_name: "Gravitas Premier League",
-      image: "/assets/images/jumble.png",
-      category: "Technical",
-      organiser: "IEEE-CS",
-      price: "100",
-      description: "Online simulation of online games and blah balh blalh"
-    },
-    {
-      event_name: "Jumble Code",
-      image: "/assets/images/jumble.png",
-      category: "Technical",
-      organiser: "IEEE-CS",
-      price: "200",
-      description: "Coding questions and fun and blah blah blep"
-    },
-   ];
+  events: Event[];
 
-  constructor() { }
+  constructor(private feedservice: FeedService ) { }
 
   ngOnInit() {
+    this.feedservice.getFeed().subscribe(events => this.events = events);
   }
 
 }

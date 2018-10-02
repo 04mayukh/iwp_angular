@@ -1,0 +1,23 @@
+<div class="login">
+  <div class="form">
+      <h3 class="align"><span>Login</span></h3>
+      <form class="form" novalidate [formGroup]="loginForm" #lform="ngForm" (ngSubmit)="onSubmit()">
+          <p>
+            <mat-form-field class="input-align">
+              <input matInput formControlName="username" placeholder="Username" type="text" [errorStateMatcher]="matcher" required>
+              <mat-error *ngIf="formErrors.username">{{formErrors.username}}</mat-error>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field class="input-align">
+              <input matInput formControlName="password" placeholder="Password" type="password" [errorStateMatcher]="matcher" required>
+              <mat-error *ngIf="formErrors.password">{{formErrors.password}}</mat-error>
+            </mat-form-field>
+          </p>
+          <p>
+            <button type="submit" [disabled]="loginForm.invalid" mat-button class="background-primary text-floral-white align">Submit</button>
+          </p>
+          </form>
+  </div>
+</div>
+

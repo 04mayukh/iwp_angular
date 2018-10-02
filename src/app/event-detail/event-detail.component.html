@@ -1,0 +1,60 @@
+<div>
+  <h3>{{event.event_name}}</h3>
+  <h4><span>Conducted By: {{event.organiser}}</span><br><span>Type: {{event.category}}</span></h4>
+  <div class="detail_desc">
+    <div class="col">
+      <img src="{{event.image}}" width="100%" style="display:block">
+    </div>
+    <div class="col">
+        <p>{{event.detail_desc}}</p>
+    </div>
+  </div>
+</div>
+
+<mat-list fxFlex>
+    <mat-list-item *ngFor="let com of event.comments">
+      <h1 matLine> {{com.comment}} </h1>
+      <p matLine>
+       <span> {{com.rating}} </span>
+      </p>
+      <p matLine>
+        <span>--{{com.author}} {{com.date | date}} </span>
+       </p>
+    </mat-list-item>
+  </mat-list>
+  <mat-list fxFlex *ngIf="commentForm.valid">
+      <mat-list-item>
+        <h1 matLine> {{commentForm.get('comment').value}} </h1>
+        <p matLine>
+         <span> {{commentForm.get('rating').value}} </span>
+        </p>
+        <p matLine>
+          <span>--{{commentForm.get('author').value}}</span>
+         </p>
+      </mat-list-item>
+  </mat-list>
+<p>{{ commentForm.value | json }}</p>
+<form novalidate [formGroup]="commentForm" #cform="ngForm" (ngSubmit)="onSubmit()">
+  <div class="comment-form">
+    <p>
+      <mat-form-field>
+        <input matInput formControlName="author" placeholder="Name" type="text" [errorStateMatcher]="matcher" required>
+        <mat-error *ngIf="formErrors.author">{{formErrors.author}}</mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <span>Rating</span>
+      <mat-slider formControlName="rating" step="1" tickInterval="1" thumbLabel tickInterval="1" min="1" max="5" step="1" value="5"></mat-slider>
+    </p>
+    <p>
+      <mat-form-field>
+        <input matInput formControlName="comment" placeholder="Your Comment" rows=12 [errorStateMatcher]="matcher" required>
+        <mat-error *ngIf="formErrors.comment">{{formErrors.comment}}</mat-error>
+      </mat-form-field>
+    </p>
+  </div>
+  <button type="submit" [disabled]="commentForm.invalid" mat-button class="background-primary text-floral-white">Submit</button>
+</form>
+<div style="display:flex;justify-content:center">
+  <button mat-stroked-button color="accent" (click)="goBack()">BACK</button>
+</div>

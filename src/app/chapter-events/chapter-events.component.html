@@ -1,0 +1,15 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let event of events">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{event.event_name}}
+      </mat-panel-title>
+      <mat-panel-description>
+        Conducted By {{event.organiser}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>Event Description</p>
+    <p>{{event.description}}</p>
+    <button mat-raised-button color="primary" [routerLink]="['/user/event', event.id]">View Details</button>
+  </mat-expansion-panel>
+</mat-accordion>

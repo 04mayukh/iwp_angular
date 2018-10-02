@@ -1,0 +1,7 @@
+.main{
+    padding: 20px;
+}
+.active{
+    background-color: #07acc2;
+    color: white!important
+}

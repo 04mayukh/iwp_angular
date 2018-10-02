@@ -1,0 +1,207 @@
+<mat-tab-group color="primary">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">local_library</mat-icon>
+        About
+      </ng-template>
+      <div class="profile-top">
+      </div>
+        <div class="profile-header">
+          <div class="profile-img"><img src="../../assets/images/alberto.png" height="150px" width="150px"></div>
+          <div class="profile-head"><h4>jndkjc</h4><h4>fjdfnvk</h4></div>
+        </div>
+      <div>
+        <div>
+        <hr>
+        <div class="flex">
+            <div class="history">
+              <h2>Our History</h2>
+              <p>Started in 2010, Ristorante con Fusion quickly established itself as a culinary icon par         excellence in Hong Kong. With its unique brand of world fusion cuisine that can be found nowhere else, it enjoys patronage from the A-list clientele in Hong Kong.  Featuring four of the best three-star Michelin chefs in the world, you never know what will arrive on your plate the next time you visit us.</p>
+              <p>The restaurant traces its humble beginnings to <em>The Frying Pan</em>, a successful chain started by our CEO, Mr. Peter Pan, that featured for the first time the world's best cuisines in a pan.</p>
+            </div>
+          <div class="card">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>
+                <h2>Facts At a Glance</h2>
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <dl>
+                  <dt>Started</dt>
+                  <dd>3 Feb. 2013</dd>
+                  <dt>Major Stake Holder</dt>
+                  <dd>HK Fine Foods Inc.</dd>
+                  <dt>Last Year's Turnover</dt>
+                  <dd>$1,250,375</dd>
+                  <dt>Employees</dt>
+                  <dd>40</dd>
+                </dl>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+        
+      <div>
+        <mat-card>
+          <blockquote>
+            <h4>You better cut the pizza in four pieces because
+                I'm not hungry enough to eat six.</h4>
+            <footer>-- Yogi Berra,
+              <cite>The Wit and Wisdom of Yogi Berra,
+                P. Pepe, Diversion Books, 2014</cite>
+            </footer>
+          </blockquote>
+        </mat-card>
+      </div>
+      <div class="leaders">
+          <h3>Corporate Leadership</h3>
+          <mat-list>
+              <mat-list-item >
+                      <img matListAvatar src="../../assets/images/alberto.png" alt="fgsd">
+                      <h3 matLine>Lorem Ipsum</h3>
+                      <p matLine>
+                        <span>Lorem Dolor MAtis ipsum Lorem Dolor MAtis ipsum Lorem Dolor MAtis ipsum</span> 
+                      </p>
+                      <p matLine>
+                          <span> Lorem Dolor MAtis ipsum </span>
+                      </p>
+              </mat-list-item>
+              <mat-list-item >
+                  <img matListAvatar src="../../assets/images/alberto.png" alt="fgsd">
+                  <h3 matLine>Lorem Ipsum</h3>
+                  <p matLine>
+                    <span>Lorem Dolor MAtis ipsum Lorem Dolor MAtis ipsum Lorem Dolor MAtis ipsum</span> 
+                  </p>
+                  <p matLine>
+                      <span> Lorem Dolor MAtis ipsum </span>
+                  </p>
+              </mat-list-item>
+          </mat-list>  
+        </div>
+      </div>
+    </mat-tab>
+  
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">school</mat-icon>
+        Events
+      </ng-template>
+      <mat-accordion>
+          <mat-expansion-panel *ngFor="let event of events">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{event.event_name}}
+              </mat-panel-title>
+              <mat-panel-description>
+                Conducted By {{event.organiser}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>Event Description</p>
+            <p>{{event.description}}</p>
+            <button mat-raised-button color="primary" [routerLink]="['/user/event', event.id]">View Details</button>
+          </mat-expansion-panel>
+        </mat-accordion>
+    </mat-tab>
+  
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">message</mat-icon>
+        Contact
+      </ng-template>
+  
+      <div class="container"
+  fxLayout="column"
+  fxLayoutGap="10px">
+
+
+  <div>
+    <div class="location">
+      <div class="loc_text">
+        <h4>Our Address</h4>
+        <address>
+          IEEE CS<br>
+          VIT University<br>
+          Vellore<br>
+          <i class="fa fa-phone"></i>: +852 1234 5678<br>
+          <i class="fa fa-fax"></i>: +852 8765 4321<br>
+          <i class="fa fa-envelope"></i>: 
+          <a href="mailto:confusion@food.net">confusion@food.net</a>
+        </address>
+        <p></p>
+        <div>
+          <a mat-raised-button href="tel:+85212345678"><i class="fa fa-phone"></i> Call</a>
+          <a mat-raised-button><i class="fa fa-skype"></i> Skype</a>
+          <a mat-raised-button href="mailto:confusion@food.net"><i class="fa fa-envelope-o"></i> Email</a>
+        </div>
+      </div>
+      <div class="map">
+        
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7775.936449711567!2d79.15989618518067!3d12.973884160513077!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bad479f0ccbe067%3A0xfef222e5f36ecdeb!2sVellore+Institute+of+Technology!5e0!3m2!1sen!2sin!4v1538511589452" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div fxFlex fxFlexOffset="20px" class="form-size">
+      <h3>Send us your Feedback</h3>
+      <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
+  
+      <form novalidate *ngIf='!y' [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()" [@expand]>
+        <p>
+          <mat-form-field class="half-width" >
+            <input matInput formControlName="firstname" placeholder="First Name" type="text" [errorStateMatcher]="matcher"  required>
+            <mat-error *ngIf="formErrors.firstname">{{formErrors.firstname}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="half-width">
+            <input matInput formControlName="lastname" placeholder="Last Name" type="text" [errorStateMatcher]="matcher" required>
+            <mat-error *ngIf="formErrors.lastname">{{formErrors.lastname}}</mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="half-width">
+            <input matInput formControlName="telnum" placeholder="Tel. Number" type="tel" pattern="[0-9]*" [errorStateMatcher]="matcher" required>
+            <mat-error *ngIf="formErrors.telnum">{{formErrors.telnum}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="half-width">
+            <input matInput formControlName="email" placeholder="Email" type="email" email [errorStateMatcher]="matcher" required>
+            <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
+          </mat-form-field>
+        </p>
+        <table class="form-size">
+          <td>
+            <mat-slide-toggle formControlName="agree">May we contact you?</mat-slide-toggle>
+          </td>
+          <td>
+            <mat-select placeholder="How?" formControlName="contacttype">
+              <mat-option *ngFor="let ctype of contactType" [value]="ctype">
+                {{ ctype }}
+              </mat-option>
+            </mat-select>
+          </td>
+          </table>
+        <p>
+          <mat-form-field class="full-width">
+            <textarea matInput formControlName="message" placeholder="Your Feedback" rows=12></textarea>
+          </mat-form-field>
+        </p>
+        <button type="submit" [disabled]="feedbackForm.invalid" mat-button class="background-primary text-floral-white">Submit</button>
+      </form>
+      <div *ngIf="!res&&y">
+        <h3>Submitting Form</h3>
+        <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+      </div>
+      <div *ngIf="res&&y" [@expand]>
+        <h2>YOUR SUBMISSION</h2>
+        <p>Firstname:{{res.firstname}}</p>
+        <p>Lastname:{{res.lastname}}</p>
+        <p>Tel. Number:{{res.telnum}}</p>
+        <p>Email:{{res.email}}</p>
+        <p>Contact You?:{{res.agree}}</p>
+        <p>How?:{{res.contacttype}}</p>
+        <p>Feedback:{{res.message}}</p>
+      </div>
+    </div> -->
+    </div>
+    </mat-tab>
+  </mat-tab-group>

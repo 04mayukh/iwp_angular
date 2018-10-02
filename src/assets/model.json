@@ -1,0 +1,43 @@
+{
+"Event":{
+    "event_name": "string",
+    "image": "string",
+    "category": "string",
+    "organiser": "string",
+    "organiser_img": "string",
+    "price": "string",
+    "description": "string",
+    "detail_desc": "string",
+    "comments": "Comment[]",
+    "register_count":"Number",
+    "event_date":"string",
+    "popularity":"string",
+    "status":"string (past or upcoming)"  
+    },
+"Comment": {
+    "rating": "number",
+    "comment": "string",
+    "author": "string",
+    "date": "string"
+    },
+
+
+"feed":{
+    "name":"String",
+    "createdby":"String",
+    "img_url":"String",
+    "Likes":"number",
+    "associated_event":"String",
+    "Chapter":"string"
+},
+
+"user":{
+    "name":"string",
+    "about":"string",
+    "img_url":"string",
+    "skills":"array type with push functionality",
+    "registered_events":"string",
+    "upcoming_events":"string",
+    "pastevents":"string"
+}
+}    

@@ -1,0 +1,66 @@
+*{
+    padding: 0px;
+    margin: 0px
+}
+
+.profile-top{
+    background: url("../../assets/images/form_bg.png");
+    width: 100%;
+    height: 200px;
+    background-position: center;
+    background-repeat: no-repeat
+}
+
+.profile-header{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: -77px
+}
+.profile-head{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 50px
+}
+h4:nth-child(1){
+    color: white
+}
+.profile-img{
+    height: 154px;
+    width: 154px;
+    margin-right: 50px;
+    border-radius: 50%;
+    border:1px solid #484848
+}
+
+.profile-img img{
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.about-section{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    border-top: 2px solid #15557e;
+    border-bottom: 2px solid #15557e
+}
+.about{
+    padding: 10px;
+    width: 60%;
+}
+.interests{
+    padding: 10px;
+    width: 30%;
+    display: flex;
+    align-items: center;
+}
+.interests div{
+    border-left: 2px solid #4d4463;
+    padding: 0px 30px;
+}
+mat-panel-description{
+    justify-content: flex-end
+}

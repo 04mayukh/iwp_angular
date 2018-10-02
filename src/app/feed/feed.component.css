@@ -1,3 +1,10 @@
 .card-holder{
-    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.card{
+    display: block;
+    width: 80%;
+    margin: 30px auto
 }

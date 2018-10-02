@@ -1,19 +1,30 @@
-<div class="card-holder" *ngFor="let event of events">
-  <mat-card>
-      <mat-card-header>
-        <mat-card-title>
-          <h3>{{event.event_name | uppercase}}</h3>
-        </mat-card-title>
-      </mat-card-header>
-      <img mat-card-image src="{{event.image}}" alt={{event.event_name}}>
-      <mat-card-content>
-        <p>{{event.description}}
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>Register</button>
-        <span class="flex-spacer"></span>
-      </mat-card-actions>
-    </mat-card>
+<div class="card-holder">
+      <mat-card class="card" *ngFor="let event of events">
+          <mat-card-header>
+            <mat-list>
+                <mat-list-item>
+                        <img matListAvatar src="{{event.organiser_img}}">
+                        <h3 matLine> {{event.event_name | uppercase}}</h3>
+                        <p matLine>
+                            <span>{{event.organiser}}</span>
+                        </p>
+                </mat-list-item>
+            </mat-list> 
+          </mat-card-header>
+          <img class="card" mat-card avatar src="{{event.image}}" alt={{event.event_name}} height="400px">
+          <mat-card-content>
+            <h3>
+              {{event.category}}
+            </h3>
+            <p>
+              {{event.description}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button [routerLink]="['/user/event', event.id]">More Details</button>
+            <button mat-button>Register</button>
+            <span class="flex-spacer"></span>
+          </mat-card-actions>
+        </mat-card>
 </div>    
