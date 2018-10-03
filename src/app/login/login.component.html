@@ -4,8 +4,8 @@
       <form class="form" novalidate [formGroup]="loginForm" #lform="ngForm" (ngSubmit)="onSubmit()">
           <p>
             <mat-form-field class="input-align">
-              <input matInput formControlName="username" placeholder="Username" type="text" [errorStateMatcher]="matcher" required>
-              <mat-error *ngIf="formErrors.username">{{formErrors.username}}</mat-error>
+              <input matInput formControlName="email" placeholder="Email" type="text" [errorStateMatcher]="matcher" required>
+              <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
             </mat-form-field>
           </p>
           <p>

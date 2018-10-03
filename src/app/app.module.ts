@@ -19,7 +19,10 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 
-import { AppRoutingModule } from './app-routing/app-routing.module'
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import { baseURL } from './shared/baseurl';
+import { RestangularModule, Restangular } from 'ngx-restangular';
+import { RestangularConfigFactory } from './shared/restConfig';
 
 
 import 'hammerjs';
@@ -64,9 +67,10 @@ import { EventdetailService } from './services/eventdetail.service';
     MatTabsModule,
     MatExpansionModule,
     AppRoutingModule,
-    MatIconModule
+    MatIconModule,
+    RestangularModule.forRoot(RestangularConfigFactory)
   ],
-  providers: [FeedService,ProfileService,EventdetailService],
+  providers: [FeedService,ProfileService,EventdetailService,{provide: 'BaseURL', useValue: baseURL}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

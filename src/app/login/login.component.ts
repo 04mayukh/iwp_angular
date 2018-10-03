@@ -6,6 +6,7 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
 
 import { Router } from '@angular/router';
+import { Restangular } from 'ngx-restangular';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -25,14 +26,15 @@ export class LoginComponent implements OnInit {
 
   @ViewChild('lform') feedbackFormDirective;
   loginForm: FormGroup;
+  loginData: any;
   formErrors = {
-    'username': '',
+    'email': '',
     'password': ''
   };
   validationMessages = {
-    username:{
-      minlength:'Username must be at least 4 characters long.',
-      required:'Username is required.'
+    email:{
+      minlength:'Email must be at least 4 characters long.',
+      required:'Email is required.'
     },
     password:{
       minlength:'Password must be at least 8 characters long.',
@@ -40,14 +42,14 @@ export class LoginComponent implements OnInit {
     }
   };
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router,private restangular:Restangular) {
     this.createForm();
    }
 
    createForm(){
     this.loginForm = this.fb.group({
       password: ['', [Validators.required,Validators.minLength(8)]],
-      username: ['', [Validators.required,Validators.minLength(4)]]
+      email: ['', [Validators.required,Validators.minLength(4)]]
     });
 
     this.loginForm.valueChanges.subscribe(data => this.onValueChanged(data));
@@ -77,9 +79,14 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit() {
+    this.loginData = this.loginForm.value;
+    console.log(this.loginData)
+    this.restangular.all('api/auth/login').post(this.loginData).subscribe(data =>{
+      console.log("SUccessssss");
+      this.router.navigate(['/', 'user']);
+    });
     this.loginForm.reset();
     this.feedbackFormDirective.resetForm();    
-    this.router.navigate(['/', 'user']);
   }
 
   matcher = new MyErrorStateMatcher();
