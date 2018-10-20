@@ -13,7 +13,7 @@ export class FeedComponent implements OnInit {
   constructor(private feedservice: FeedService ) { }
 
   ngOnInit() {
-    this.feedservice.getFeed().subscribe(events => this.events = events);
+    this.feedservice.getFeed().subscribe(events => {this.events = events});
   }
 
 }

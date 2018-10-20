@@ -1,4 +1,4 @@
-<div class="card-holder">
+<div class="card-holder" *ngIf="events">
       <mat-card class="card" *ngFor="let event of events.posts">
           <mat-card-header>
             <mat-list>
@@ -11,7 +11,7 @@
                 </mat-list-item>
             </mat-list> 
           </mat-card-header>
-          <img class="card" mat-card avatar src="{{/assets/images/jumble.png}}" alt={{event.name}} height="400px">
+          <img class="card" mat-card avatar src="/assets/images/jumble.png" alt={{event.name}} height="400px">
           <mat-card-content>
             <h3>
               {{event.event}}
@@ -22,7 +22,7 @@
           </mat-card-content>
           <mat-card-actions>
             <button mat-button>LIKE</button>
-            <button mat-button [routerLink]="['/user/event', event.id]">More Details</button>
+            <button mat-button [routerLink]="['/user/event', event.event]">More Details</button>
             <button mat-button>Register</button>
             <span class="flex-spacer"></span>
           </mat-card-actions>

@@ -83,6 +83,11 @@ export class LoginComponent implements OnInit {
     console.log(this.loginData)
     this.restangular.all('api/auth/login').post(this.loginData).subscribe(data =>{
       console.log("SUccessssss");
+      console.log(data.user);
+      // this.restangular.one('api/posts/view-post').get().subscribe(data => {
+      //   console.log("data coming");
+      //   console.log(data.posts);
+      // })
       this.router.navigate(['/', 'user']);
     });
     this.loginForm.reset();

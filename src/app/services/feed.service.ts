@@ -11,7 +11,7 @@ export class FeedService {
   constructor(private restangular:Restangular) { }
 
   getFeed(): Observable<any[]>{
-    return this.restangular.all('api/posts/view-posts').get();
+        return  this.restangular.one('api/posts/view-post').get();
   }
 
 }

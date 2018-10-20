@@ -14,6 +14,7 @@ export class ChapterdetailsComponent implements OnInit {
   constructor(private eventdetailservice: EventdetailService,private route: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log("lol");
     const id = +this.route.snapshot.params['id'];
     this.eventdetailservice.getEventsByChapter(id).subscribe(events => this.events = events);
   }
