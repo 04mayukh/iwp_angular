@@ -11,6 +11,8 @@ import { MatCardModule } from '@angular/material/card';
 import { FeedComponent } from './feed/feed.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatTableModule} from '@angular/material/table';
+
 
 
 
@@ -100,6 +102,7 @@ import { AttendanceComponent } from './attendance/attendance.component'
     MatDividerModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTableModule,
     RestangularModule.forRoot(RestangularConfigFactory)
   ],
   providers: [FeedService,ProfileService,EventdetailService,FeedbackService,{provide: 'BaseURL', useValue: baseURL}],

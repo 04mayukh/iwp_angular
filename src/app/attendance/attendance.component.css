@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+}
+.attendance{
+    width: 90%;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center
+}
+
+.example-card {
+    max-width: 90%;
+    margin: auto
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+  .form{
+      width: 100%;
+  }
+
+  .row{
+      display: flex;
+      justify-content: space-between;
+      padding: 0px 20px;
+      margin: 10px 0px;
+  }

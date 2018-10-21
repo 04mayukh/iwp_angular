@@ -13,6 +13,7 @@ import { ChapterProfileComponent } from '../chapter-profile/chapter-profile.comp
 import { ChaptersViewChComponent } from '../chapters-view-ch/chapters-view-ch.component';
 import { ChaptereventschComponent } from '../chaptereventsch/chaptereventsch.component';
 import { CreateEventComponent } from '../create-event/create-event.component';
+import { AttendanceComponent } from '../attendance/attendance.component'
 
 export const routes: Routes = [
     { path: 'login' ,component: LoginComponent},
@@ -33,7 +34,8 @@ export const routes: Routes = [
             { path: 'chapters/:id',component: ChapterdetailsComponent},
             { path: 'chapters',component: ChaptersViewChComponent},
             { path: 'events',component: ChaptereventschComponent},
-            { path: 'newEvent',component: CreateEventComponent}
+            { path: 'newEvent',component: CreateEventComponent},
+            { path: 'attendance/:id',component: AttendanceComponent}
         ]},
     { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
