@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
 
+import { NeweventService } from '../services/newevent.service'
+
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -18,6 +20,34 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./create-event.component.css']
 })
 export class CreateEventComponent implements OnInit {
+
+
+
+  @ViewChild('lform') feedFormDirective;
+  loginForm: FormGroup;
+  newFeed: any;
+  events: any[];
+  formErrorsfeed = {
+    'description': '',
+    'event_id': '',
+    'image':''
+  };
+  validationMessagesfeed = {
+    description:{
+      minlength:'Email must be at least 4 characters long.',
+      maxlength:'Cannot be more than 150 words',
+      required:'Description is required.'
+    },
+    event_id:{
+      required:'Event is required.'
+    },
+    image:{
+      required: 'Image is required'
+    }
+  };
+
+
+  //Another one
 
   @ViewChild('eventform') feedbackFormDirective;
   eventForm: FormGroup;
@@ -37,46 +67,46 @@ export class CreateEventComponent implements OnInit {
   };
 
   validationMessages = {
-    'eventname': {
-      'required':      'Event Name is required.',
-      'minlength':     'First Name must be at least 2 characters long.',
-      'maxlength':     'FirstName cannot be more than 25 characters long.'
+    eventname: {
+      minlength:'Email must be at least 4 characters long.',
+      required:'Email is required.'
     },
-    'tagline': {
-      'required':      'Tag line is required.',
-      'minlength':     'Tag line must be at least 2 characters long.',
-      'maxlength':     'Last Name cannot be more than 45 characters long.'
+    tagline: {
+      required:      'Tag line is required.',
+      minlength:     'Tag line must be at least 2 characters long.',
+      maxlength:     'Last Name cannot be more than 45 characters long.'
     },
-    'description': {
-      'required':      'Description is required.',
-      'minlength':     'Description must be at least 20 characters long.',
-      'maxlength':     'FirstName cannot be more than 150 characters long.'
+    description: {
+      required:      'Description is required.',
+      minlength:     'Description must be at least 20 characters long.',
+      maxlength:     'FirstName cannot be more than 150 characters long.'
     },
-    'organiser': {
-      'required':      'Organiser is required.'
+    organiser: {
+      required:      'Organiser is required.'
     },
-    'price': {
-      'required':      'Price is required.'
+    price: {
+      required:      'Price is required.'
     },
-    'date': {
+    date: {
       'required':      'Date is required.'
     },
-    'time': {
-      'required':      'Time is required.'
+    time: {
+      required:      'Time is required.'
     },
-    'venue': {
-      'required':      'Venue is required.'
-    },
+    venue: {
+      required:      'Venue is required.'
+    }
   };
 
 
 
 
-  constructor(private fb: FormBuilder) {
-    this.createForm();
+  constructor(private fb: FormBuilder, private neweventservice: NeweventService) {
+    this.createEventForm();
+    this.createFeedForm();
    }
 
-  createForm(){
+  createEventForm(){
     this.eventForm = this.fb.group({
       eventname: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(25)]],
       tagline: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(45)]],
@@ -92,6 +122,18 @@ export class CreateEventComponent implements OnInit {
     this.eventForm.valueChanges.subscribe(data => this.onValueChanged(data));
     this.onValueChanged();
   }
+
+  
+  createFeedForm(){
+    this.loginForm = this.fb.group({
+      event_id: ['', [Validators.required]],
+      description: ['', [Validators.required,Validators.minLength(4)]],
+      // file: ['', Validators.required]
+    });
+
+    this.loginForm.valueChanges.subscribe(data => this.onValueChangedfeed(data));
+    this.onValueChangedfeed();
+   }
 
 
   onValueChanged(data?: any) {
@@ -114,6 +156,34 @@ export class CreateEventComponent implements OnInit {
     }
   }
 
+
+  onValueChangedfeed(data?: any) {
+    if (!this.loginForm) { return; }
+    const form = this.loginForm;
+    for (const field in this.formErrorsfeed) {
+      if (this.formErrorsfeed.hasOwnProperty(field)) {
+        // clear previous error message (if any)
+        this.formErrorsfeed[field] = '';
+        const control = form.get(field);
+        if (control && (control.dirty || !control.valid)) {
+          const messages = this.validationMessagesfeed[field];
+          for (const key in control.errors) {
+            if (control.errors.hasOwnProperty(key)) {
+              this.formErrorsfeed[field] += messages[key] + ' ';
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // selectedFile: File;
+
+  // onFileChanged(event) {
+  //   this.selectedFile = event.target.files[0];
+  //   console.log(this.selectedFile)
+  // }
+
   onSubmit() {
     this.event = this.eventForm.value;
     this.eventForm.reset();
@@ -121,7 +191,15 @@ export class CreateEventComponent implements OnInit {
     console.log(this.event);
   }
 
+  onFeedSubmit() {
+    this.newFeed = this.loginForm.value;
+    this.loginForm.reset();
+    this.feedFormDirective.resetForm();
+    console.log(this.newFeed);
+  }
+
   ngOnInit() {
+    this.neweventservice.getEventsWithID().subscribe((data) => {this.event = data});
   }
 
   matcher = new MyErrorStateMatcher();

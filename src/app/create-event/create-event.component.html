@@ -67,5 +67,31 @@
       </div>
 
     </mat-tab>
-    <mat-tab label="New Feed"> Content 2 </mat-tab>
+    <mat-tab label="New Feed"> 
+        <p>{{ loginForm.value | json }} {{ loginForm.status | json }}</p>
+        <div class="event-form">
+        <form class="eventForm" novalidate [formGroup]="loginForm" #lform="ngForm" (ngSubmit)="onFeedSubmit()">
+            <p>
+                <mat-select placeholder="Category" formControlName="event_id" required>
+                    <mat-option *ngFor="let ctype of event" [value]="ctype._id">
+                      {{ ctype.event_name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="formErrorsfeed.event_id">{{formErrorsfeed.event_id}}</mat-error>
+            </p>
+            <p>
+                <mat-form-field class="full-width">
+                  <textarea matInput formControlName="description" placeholder="Description for feed" rows=12></textarea>
+                  <mat-error *ngIf="formErrorsfeed.description">{{formErrorsfeed.description}}</mat-error>
+                </mat-form-field>
+              </p>
+            <!-- <p>
+                    <input formControlName="file" (change)="onFileChanged($event)" placeholder="Password" type="file" required>
+            </p> -->
+            <p>
+              <button type="submit" [disabled]="loginForm.invalid" mat-button class="background-primary text-floral-white align">Submit</button>
+            </p>
+            </form>
+            </div>
+     </mat-tab>
 </mat-tab-group>

@@ -56,7 +56,8 @@ import { MainViewChapterComponent } from './main-view-chapter/main-view-chapter.
 import { ChapterProfileComponent } from './chapter-profile/chapter-profile.component';
 import { ChaptersViewChComponent } from './chapters-view-ch/chapters-view-ch.component';
 import { ChaptereventschComponent } from './chaptereventsch/chaptereventsch.component';
-import { CreateEventComponent } from './create-event/create-event.component'
+import { CreateEventComponent } from './create-event/create-event.component';
+import { AttendanceComponent } from './attendance/attendance.component'
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import { CreateEventComponent } from './create-event/create-event.component'
     ChaptersViewChComponent,
     ChaptereventschComponent,
     CreateEventComponent,
+    AttendanceComponent,
   ],
   imports: [
     BrowserModule,
