@@ -1,0 +1,20 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Event Name</mat-card-title>
+    <mat-card-subtitle>Attendance</mat-card-subtitle>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+          <p class="row" *ngFor="let participant of participants">
+            <span>{{participant.name}}</span>
+            <span>Present</span>
+          </p>
+  </mat-card-content>
+  <!-- <mat-card-actions>
+    
+  </mat-card-actions> -->
+</mat-card>
+<div style="display:flex;justify-content:center">
+  <button mat-stroked-button color="accent" (click)="goBack()">BACK</button>
+</div>
