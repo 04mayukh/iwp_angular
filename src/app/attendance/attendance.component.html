@@ -15,7 +15,6 @@
             <p class="row" *ngFor="let participant of participants">
               <span>{{participant.name}}</span>
               <mat-slide-toggle formControlName="{{participant._id}}"></mat-slide-toggle>
-              <mat-divider></mat-divider>
             <p>
               <button type="submit" mat-button class="background-primary text-floral-white align">Submit</button>
             </p>

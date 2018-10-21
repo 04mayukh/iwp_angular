@@ -15,6 +15,7 @@ export class AttendanceComponent implements OnInit {
   attendanceForm: FormGroup;
   participants: any[];
   aformData: any;
+  finalAttendance:any;
   constructor(private fb: FormBuilder,private route: ActivatedRoute, private attendanceservice:AttendanceService) { }
 
    createForm(x){
@@ -44,6 +45,11 @@ export class AttendanceComponent implements OnInit {
     }
     this.createForm(x);
 
+  }
+
+  onSubmit(){
+    this.finalAttendance = this.attendanceForm.value;
+    console.log(this.finalAttendance);
   }
 
 }
