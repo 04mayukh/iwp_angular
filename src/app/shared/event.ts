@@ -1,7 +1,7 @@
 import { Comment } from './comment'
 
 export class Event{
-    id: number;
+    id: String;
     org_id: number;
     event_name: string;
     image: string;

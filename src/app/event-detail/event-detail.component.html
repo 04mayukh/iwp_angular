@@ -1,17 +1,17 @@
-<div>
+<div *ngIf="event">
   <h3>{{event.event_name}}</h3>
   <h4><span>Conducted By: {{event.organiser}}</span><br><span>Type: {{event.category}}</span></h4>
   <div class="detail_desc">
     <div class="col">
-      <img src="{{event.image}}" width="100%" style="display:block">
+      <img src="../../assets/images/jumble.png" width="100%" style="display:block">
     </div>
     <div class="col">
-        <p>{{event.detail_desc}}</p>
+        <p>Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum{{event.detail_desc}}</p>
     </div>
   </div>
 </div>
 
-<mat-list fxFlex>
+<mat-list fxFlex *ngIf="event">
     <mat-list-item *ngFor="let com of event.comments">
       <h1 matLine> {{com.comment}} </h1>
       <p matLine>

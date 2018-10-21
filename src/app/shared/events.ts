@@ -2,7 +2,7 @@ import { Event } from './event'
 
 export const EVENTS: Event[] = [
     {
-      id:1,
+      id:"1",
       org_id:1,
       event_name: "Gravitas Premier League",
       image: "/assets/images/jumble.png",
@@ -33,7 +33,7 @@ export const EVENTS: Event[] = [
         }]
     },
     {
-      id:2,
+      id:"2",
       org_id:1,
       event_name: "Jumbleeeeeeeeee Code",
       image: "/assets/images/jumble.png",
@@ -64,7 +64,7 @@ export const EVENTS: Event[] = [
         }]
     },
     {
-      id:3,
+      id:"3",
       org_id:1,
       event_name: "Jumble Code",
       image: "/assets/images/jumble.png",

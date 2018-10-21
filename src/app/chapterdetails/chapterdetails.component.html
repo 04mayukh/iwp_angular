@@ -23,10 +23,10 @@
             <mat-card>
               <mat-card-header>
                 <mat-card-title>
-                <h2>Facts At a Glance</h2>
+                <h3>Facts At a Glance</h3>
                 </mat-card-title>
               </mat-card-header>
-              <mat-card-content>
+              <mat-card-content style="padding: 10px">
                 <dl>
                   <dt>Started</dt>
                   <dd>3 Feb. 2013</dd>
@@ -45,14 +45,14 @@
         
       <div>
         <mat-card>
-          <blockquote>
+          <!-- <blockquote> -->
             <h4>You better cut the pizza in four pieces because
                 I'm not hungry enough to eat six.</h4>
             <footer>-- Yogi Berra,
               <cite>The Wit and Wisdom of Yogi Berra,
                 P. Pepe, Diversion Books, 2014</cite>
             </footer>
-          </blockquote>
+          <!-- </blockquote> -->
         </mat-card>
       </div>
       <div class="leaders">
@@ -136,18 +136,17 @@
           <a mat-raised-button href="mailto:confusion@food.net"><i class="fa fa-envelope-o"></i> Email</a>
         </div>
       </div>
-      <div class="map">
-        
+      <div class="map"> 
           <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7775.936449711567!2d79.15989618518067!3d12.973884160513077!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bad479f0ccbe067%3A0xfef222e5f36ecdeb!2sVellore+Institute+of+Technology!5e0!3m2!1sen!2sin!4v1538511589452" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
       </div>
     </div>
   </div>
 
-  <!-- <div fxFlex fxFlexOffset="20px" class="form-size">
+  <div class="form-size">
       <h3>Send us your Feedback</h3>
       <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
   
-      <form novalidate *ngIf='!y' [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()" [@expand]>
+      <form novalidate *ngIf='!y' [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
         <p>
           <mat-form-field class="half-width" >
             <input matInput formControlName="firstname" placeholder="First Name" type="text" [errorStateMatcher]="matcher"  required>
@@ -187,11 +186,11 @@
         </p>
         <button type="submit" [disabled]="feedbackForm.invalid" mat-button class="background-primary text-floral-white">Submit</button>
       </form>
-      <div *ngIf="!res&&y">
+      <!-- <div *ngIf="!res&&y">
         <h3>Submitting Form</h3>
         <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
       </div>
-      <div *ngIf="res&&y" [@expand]>
+      <div *ngIf="res&&y">
         <h2>YOUR SUBMISSION</h2>
         <p>Firstname:{{res.firstname}}</p>
         <p>Lastname:{{res.lastname}}</p>
@@ -200,8 +199,11 @@
         <p>Contact You?:{{res.agree}}</p>
         <p>How?:{{res.contacttype}}</p>
         <p>Feedback:{{res.message}}</p>
-      </div>
-    </div> -->
+      </div> -->
+    </div>
     </div>
     </mat-tab>
   </mat-tab-group>
+  <div style="display:flex;justify-content:center">
+    <button mat-stroked-button color="accent" (click)="goBack()">BACK</button>
+  </div>

@@ -1,0 +1,13 @@
+.event-form{
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+.full-width{
+    width: 60%;
+}
+
+.eventForm{
+    width: 80%;
+}

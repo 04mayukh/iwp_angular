@@ -10,6 +10,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { FeedComponent } from './feed/feed.component';
 import { MatGridListModule } from '@angular/material/grid-list';
+import {MatDividerModule} from '@angular/material/divider';
+
+
 
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,6 +21,12 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSelectModule} from '@angular/material/select';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
+
+
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { baseURL } from './shared/baseurl';
@@ -33,11 +42,21 @@ import { LoginComponent } from './login/login.component';
 import { ChaptersViewComponent } from './chapters-view/chapters-view.component';
 import { ChapterEventsComponent } from './chapter-events/chapter-events.component';
 import { ChapterdetailsComponent } from './chapterdetails/chapterdetails.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
+
+
 
 // Services
 import { FeedService } from './services/feed.service';
 import { ProfileService } from './services/profile.service';
 import { EventdetailService } from './services/eventdetail.service';
+import { FeedbackService } from './services/feedback.service';
+import { MainViewChapterComponent } from './main-view-chapter/main-view-chapter.component';
+import { ChapterProfileComponent } from './chapter-profile/chapter-profile.component';
+import { ChaptersViewChComponent } from './chapters-view-ch/chapters-view-ch.component';
+import { ChaptereventschComponent } from './chaptereventsch/chaptereventsch.component';
+import { CreateEventComponent } from './create-event/create-event.component'
 
 
 @NgModule({
@@ -50,7 +69,12 @@ import { EventdetailService } from './services/eventdetail.service';
     LoginComponent,
     ChaptersViewComponent,
     ChapterEventsComponent,
-    ChapterdetailsComponent
+    ChapterdetailsComponent,
+    MainViewChapterComponent,
+    ChapterProfileComponent,
+    ChaptersViewChComponent,
+    ChaptereventschComponent,
+    CreateEventComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,9 +92,15 @@ import { EventdetailService } from './services/eventdetail.service';
     MatExpansionModule,
     AppRoutingModule,
     MatIconModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     RestangularModule.forRoot(RestangularConfigFactory)
   ],
-  providers: [FeedService,ProfileService,EventdetailService,{provide: 'BaseURL', useValue: baseURL}],
+  providers: [FeedService,ProfileService,EventdetailService,FeedbackService,{provide: 'BaseURL', useValue: baseURL}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

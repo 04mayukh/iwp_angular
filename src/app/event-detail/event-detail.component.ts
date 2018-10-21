@@ -81,10 +81,10 @@ export class EventDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("lol");
     const id = this.route.snapshot.params['id'];
     console.log(id);
-    this.eventdetailservice.getEventbyId(id).subscribe(event => {this.event = event;console.log(event.events)});
+    // this.eventdetailservice.getEventbyId(id).subscribe(event => {this.event = event.events;console.log(event.events)});
+    this.eventdetailservice.getEventbyId(id).subscribe(event => {this.event = event;console.log(event)});
   }
 
   onSubmit(){
@@ -93,7 +93,10 @@ export class EventDetailComponent implements OnInit {
     this.newcomment.date = date.toISOString();
     this.commentForm.reset();
     this.feedbackFormDirective.resetForm({rating:5,author:'',comment:''});
-    this.event.comments.push(this.newcomment);  //This should be copy
+    this.event.comments.push(this.newcomment);
+    console.log(this.newcomment);
+    this.eventdetailservice.submitComment(this.newcomment).subscribe((data) =>console.log(data));
+    //This should be copy
     // this.dishcopy.save().subscribe(dish => this.dishh = dish);
   }
 

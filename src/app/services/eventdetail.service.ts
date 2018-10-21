@@ -10,8 +10,9 @@ export class EventdetailService {
   constructor(private restangular:Restangular) { }
 
   getEventbyId(id:any): Observable<any>{
-    // return of(EVENTS.filter((event) => (event.id === id))[0]);
-    return this.restangular.one('api/events/'+ id).get();
+    console.log(EVENTS.filter((event) => (event.id === id))[0])
+    return of(EVENTS.filter((event) => (event.id === id))[0]);
+    // return this.restangular.one('api/events/'+ id).get();
   }
 
   getEvents(): Observable<any>{
@@ -20,5 +21,9 @@ export class EventdetailService {
 
   getEventsByChapter(id:number): Observable<any>{
     return of(EVENTS.filter((event) => (event.org_id === id)));
+  }
+
+  submitComment(comment:any): Observable<any>{
+    return of(comment);
   }
 }

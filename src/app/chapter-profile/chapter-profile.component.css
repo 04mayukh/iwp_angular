@@ -83,3 +83,15 @@ mat-panel-description{
 .full-width{
     width: 80%;
 }
+
+.feedback{
+    padding: 0px 20px;
+}
+.lol{
+    padding: 0px 20px;
+}
+
+mat-card-title{
+    font-size: 15px;
+    font-weight: bold
+}

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { EventdetailService } from '../services/eventdetail.service'
 
 @Component({
-  selector: 'app-chapter-events',
-  templateUrl: './chapter-events.component.html',
-  styleUrls: ['./chapter-events.component.css']
+  selector: 'app-chaptereventsch',
+  templateUrl: './chaptereventsch.component.html',
+  styleUrls: ['./chaptereventsch.component.css']
 })
-export class ChapterEventsComponent implements OnInit {
+export class ChaptereventschComponent implements OnInit {
 
   events: any[];
   url: any
@@ -16,5 +16,4 @@ export class ChapterEventsComponent implements OnInit {
   ngOnInit() {
     this.eventdetailservice.getEvents().subscribe(events => this.events = events);
   }
-
 }

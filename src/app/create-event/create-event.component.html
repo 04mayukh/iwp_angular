@@ -1,0 +1,71 @@
+<mat-tab-group>
+    <mat-tab label="New Event">
+
+        <p>{{ eventForm.value | json }} {{ eventForm.status | json }}</p>
+
+
+      <div class="event-form">
+        <form class="eventForm" novalidate [formGroup]="eventForm" #eventform="ngForm" (ngSubmit)="onSubmit()">
+            <p>
+              <mat-form-field class="full-width">
+                <input matInput formControlName="eventname" placeholder="Name" type="text" required [errorStateMatcher]="matcher">
+                <mat-error *ngIf="formErrors.eventname">{{formErrors.eventname}}</mat-error>
+              </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="full-width">
+                    <input matInput formControlName="tagline" placeholder="Tagline" type="text" [errorStateMatcher]="matcher" required>
+                    <mat-error *ngIf="formErrors.tagline">{{formErrors.tagline}}</mat-error>
+                </mat-form-field>
+              </p>
+              <p>
+                  <mat-select placeholder="Category" formControlName="category">
+                      <mat-option *ngFor="let ctype of type" [value]="ctype">
+                        {{ ctype }}
+                      </mat-option>
+                    </mat-select>
+              </p>
+              <p>
+                  <mat-form-field class="full-width">
+                    <input matInput formControlName="organiser" placeholder="Organiser" type="text" [errorStateMatcher]="matcher" required>
+                    <mat-error *ngIf="formErrors.organiser">{{formErrors.organiser}}</mat-error>
+                  </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="full-width">
+                      <input matInput formControlName="price" placeholder="Price" type="text" [errorStateMatcher]="matcher" required>
+                      <mat-error *ngIf="formErrors.price">{{formErrors.price}}</mat-error>
+                    </mat-form-field>
+                  </p> 
+                  <p>
+                      <mat-form-field class="full-width">
+                        <input matInput formControlName="venue" placeholder="Venue" type="text" [errorStateMatcher]="matcher" required>
+                        <mat-error *ngIf="formErrors.venue">{{formErrors.venue}}</mat-error>
+                      </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field class="full-width">
+                          <input matInput formControlName="date" [matDatepicker]="picker" placeholder="Choose a date">
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field class="full-width">
+                          <input matInput formControlName="time" placeholder="Time" type="time" [errorStateMatcher]="matcher" required>
+                          <mat-error *ngIf="formErrors.time">{{formErrors.time}}</mat-error>
+                        </mat-form-field>
+                      </p>
+                      <p>
+                          <mat-form-field class="full-width">
+                            <textarea matInput formControlName="description" placeholder="Your Feedback" rows=12></textarea>
+                            <mat-error *ngIf="formErrors.description">{{formErrors.description}}</mat-error>
+                          </mat-form-field>
+                        </p>
+            <button type="submit" [disabled]="eventForm.invalid" mat-button class="background-primary text-floral-white">Submit</button>
+          </form>
+      </div>
+
+    </mat-tab>
+    <mat-tab label="New Feed"> Content 2 </mat-tab>
+</mat-tab-group>
