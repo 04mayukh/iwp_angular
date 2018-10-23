@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       required:'Email is required.'
     },
     password:{
-      minlength:'Password must be at least 8 characters long.',
+      minlength:'Password must be at least 4 characters long.',
       required:'Password is required.'
     }
   };
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
 
    createForm(){
     this.loginForm = this.fb.group({
-      password: ['', [Validators.required,Validators.minLength(8)]],
+      password: ['', [Validators.required,Validators.minLength(4)]],
       email: ['', [Validators.required,Validators.minLength(4)]]
     });
 

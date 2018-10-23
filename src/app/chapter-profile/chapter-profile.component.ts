@@ -19,7 +19,7 @@ export class ChapterProfileComponent implements OnInit {
   ngOnInit() {
     this.profileservice.getProfile().subscribe(profile => this.profile=profile);
     this.profileservice.getPastEvent().subscribe(pastevent => {this.pastEvent=pastevent;console.log(this.pastEvent)});
-    this.profileservice.getRegisteredEvent().subscribe(upcomingEvent => this.upcomingEvent=upcomingEvent);
+    this.profileservice.getFutureEvent().subscribe(upcomingEvent => this.upcomingEvent=upcomingEvent);
     this.feedbackservice.getFeedback().subscribe((result) => this.feedbacks = result);
   }
 

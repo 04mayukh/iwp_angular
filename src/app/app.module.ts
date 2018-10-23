@@ -62,6 +62,7 @@ import { CreateEventComponent } from './create-event/create-event.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { ChapterAttendanceComponent } from './chapter-attendance/chapter-attendance.component';
 import { ViewAttendanceComponent } from './view-attendance/view-attendance.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -83,7 +84,8 @@ import { ViewAttendanceComponent } from './view-attendance/view-attendance.compo
     CreateEventComponent,
     AttendanceComponent,
     ChapterAttendanceComponent,
-    ViewAttendanceComponent
+    ViewAttendanceComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

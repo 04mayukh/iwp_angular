@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfileService } from '../services/profile.service';
+import { ChaptersService } from '../services/chapters.service';
 
 @Component({
   selector: 'app-main-view-chapter',
@@ -12,10 +12,10 @@ export class MainViewChapterComponent implements OnInit {
   profile:any;
   name:String;
 
-  constructor( private profileservice:ProfileService) { }
+  constructor( private chapterservice:ChaptersService) { }
 
   ngOnInit() {
-    this.profileservice.getProfile().subscribe(profile => {this.profile=profile;this.name = this.profile.user.name;});
+    // this.chapterservice.getProfile().subscribe(profile => {this.profile=profile;this.name = this.profile.user.name;});
   }
   
 

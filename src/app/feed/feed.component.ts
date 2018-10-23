@@ -8,12 +8,11 @@ import { FeedService } from '../services/feed.service';
 })
 export class FeedComponent implements OnInit {
 
-  events: Event[];
-
+  events: any;
   constructor(private feedservice: FeedService ) { }
 
   ngOnInit() {
-    this.feedservice.getFeed().subscribe(events => {this.events = events});
+    this.feedservice.getFeed().subscribe((result) => {this.events = result;console.log(result)});
   }
 
 }

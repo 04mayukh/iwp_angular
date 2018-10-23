@@ -13,31 +13,38 @@ export class AttendanceService {
     const x: any[]=[
       {
         _id:"one",
-        name:"Mayukh"
+        name:"Mayukh",
+        attended: true
       },
       {
         _id:"two",
-        name:"Anant"
+        name:"Anant",
+        attended: false
       },
       {
         _id:"three",
-        name:"Queenie"
+        name:"Queenie",
+        attended: true
       },
       {
         _id:"four",
-        name:"Kriti"
+        name:"Kriti",
+        attended: true
       },
       {
         _id:"five",
-        name:"Ankit"
+        name:"Ankit",
+        attended: false
       },
       {
         _id:"six",
-        name:"Raghu"
+        name:"Raghu",
+        attended: true
       },
       {
         _id:"seven",
-        name:"Harshit"
+        name:"Harshit",
+        attended: true
       }
     ]
     return  of(x);

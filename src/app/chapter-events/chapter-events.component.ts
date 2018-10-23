@@ -8,13 +8,13 @@ import { EventdetailService } from '../services/eventdetail.service'
 })
 export class ChapterEventsComponent implements OnInit {
 
-  events: any[];
+  event: any;
   url: any
 
   constructor(private eventdetailservice: EventdetailService) { }
 
   ngOnInit() {
-    this.eventdetailservice.getEvents().subscribe(events => this.events = events);
+    this.eventdetailservice.getEvents().subscribe(events => {this.event = events;console.log(this.event.events)});
   }
 
 }

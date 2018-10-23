@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EventdetailService } from '../services/eventdetail.service';
+import { ChaptersService } from '../services/chapters.service';
 import { Params, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FeedbackService } from '../services/feedback.service';
@@ -65,7 +66,7 @@ export class ChapterdetailsComponent implements OnInit {
 
 
 
-  constructor(private eventdetailservice: EventdetailService,private route: ActivatedRoute,private fb: FormBuilder, private feedbackservice: FeedbackService,private location: Location) { 
+  constructor(private eventdetailservice: EventdetailService,private route: ActivatedRoute,private fb: FormBuilder, private feedbackservice: FeedbackService,private location: Location, private chapterservice: ChaptersService) { 
     this.createForm();
   }
 
@@ -116,12 +117,13 @@ export class ChapterdetailsComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
+  chapter: any;
 
   ngOnInit() {
     console.log("lol");
     const id = +this.route.snapshot.params['id'];
     this.eventdetailservice.getEventsByChapter(id).subscribe(events => this.events = events);
+    this.chapterservice.getChapterById(id).subscribe((data) => {this.chapter = data;console.log(this.chapter)});
   }
 
 }

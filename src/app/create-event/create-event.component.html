@@ -8,14 +8,14 @@
         <form class="eventForm" novalidate [formGroup]="eventForm" #eventform="ngForm" (ngSubmit)="onSubmit()">
             <p>
               <mat-form-field class="full-width">
-                <input matInput formControlName="eventname" placeholder="Name" type="text" required [errorStateMatcher]="matcher">
-                <mat-error *ngIf="formErrors.eventname">{{formErrors.eventname}}</mat-error>
+                <input matInput formControlName="eventName" placeholder="Name" type="text" required [errorStateMatcher]="matcher">
+                <mat-error *ngIf="formErrors.eventName">{{formErrors.eventName}}</mat-error>
               </mat-form-field>
             </p>
             <p>
                 <mat-form-field class="full-width">
-                    <input matInput formControlName="tagline" placeholder="Tagline" type="text" [errorStateMatcher]="matcher" required>
-                    <mat-error *ngIf="formErrors.tagline">{{formErrors.tagline}}</mat-error>
+                    <input matInput formControlName="tagLine" placeholder="Tagline" type="text" [errorStateMatcher]="matcher" required>
+                    <mat-error *ngIf="formErrors.tagLine">{{formErrors.tagLine}}</mat-error>
                 </mat-form-field>
               </p>
               <p>
@@ -45,15 +45,15 @@
                     </p>
                     <p>
                         <mat-form-field class="full-width">
-                          <input matInput formControlName="date" [matDatepicker]="picker" placeholder="Choose a date">
+                          <input matInput formControlName="eventDate" [matDatepicker]="picker" placeholder="Choose a date">
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                           <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
                     </p>
                     <p>
                         <mat-form-field class="full-width">
-                          <input matInput formControlName="time" placeholder="Time" type="time" [errorStateMatcher]="matcher" required>
-                          <mat-error *ngIf="formErrors.time">{{formErrors.time}}</mat-error>
+                          <input matInput formControlName="eventTime" placeholder="Time" type="time" [errorStateMatcher]="matcher" required>
+                          <mat-error *ngIf="formErrors.eventTime">{{formErrors.eventTime}}</mat-error>
                         </mat-form-field>
                       </p>
                       <p>
@@ -73,7 +73,7 @@
         <form class="eventForm" novalidate [formGroup]="loginForm" #lform="ngForm" (ngSubmit)="onFeedSubmit()">
             <p>
                 <mat-select placeholder="Category" formControlName="event_id" required>
-                    <mat-option *ngFor="let ctype of event" [value]="ctype._id">
+                    <mat-option *ngFor="let ctype of eventfeed" [value]="ctype._id">
                       {{ ctype.event_name }}
                     </mat-option>
                   </mat-select>
@@ -84,11 +84,11 @@
                   <textarea matInput formControlName="description" placeholder="Description for feed" rows=12></textarea>
                   <mat-error *ngIf="formErrorsfeed.description">{{formErrorsfeed.description}}</mat-error>
                 </mat-form-field>
-              </p>
+            </p>
             <!-- <p>
                     <input formControlName="file" (change)="onFileChanged($event)" placeholder="Password" type="file" required>
-            </p> -->
-            <p>
+            </p>  -->
+             <p>
               <button type="submit" [disabled]="loginForm.invalid" mat-button class="background-primary text-floral-white align">Submit</button>
             </p>
             </form>

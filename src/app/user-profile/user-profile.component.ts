@@ -15,9 +15,9 @@ export class UserProfileComponent implements OnInit {
   constructor(private profileservice: ProfileService) { }
 
   ngOnInit() {
-    this.profileservice.getProfile().subscribe(profile => this.profile=profile);
+    this.profileservice.getProfile().subscribe(profile => {this.profile=profile;console.log(this.profile.user)});
     this.profileservice.getPastEvent().subscribe(pastevent => this.pastEvent=pastevent);
-    this.profileservice.getRegisteredEvent().subscribe(upcomingEvent => this.upcomingEvent=upcomingEvent);
+    this.profileservice.getFutureEvent().subscribe(upcomingEvent => this.upcomingEvent=upcomingEvent);
   }
 
 }

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { EVENTS } from '../shared/events';
 import { Observable,of } from 'rxjs';
+import { Restangular } from 'ngx-restangular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NeweventService {
-  constructor() { }
+  constructor(private restangular: Restangular) { }
 
 
   getEventsWithID(): Observable<any>{
@@ -22,4 +23,9 @@ export class NeweventService {
     ]
     return of(event)
   }
+
+  submitEvent(data:any): Observable<any>{
+    return this.restangular.all('api/organization/add-event').post(data)
+  }
+
 }

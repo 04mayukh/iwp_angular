@@ -52,26 +52,27 @@ export class CreateEventComponent implements OnInit {
   @ViewChild('eventform') feedbackFormDirective;
   eventForm: FormGroup;
   event: any;
+  eventfeed: any;
   type: any[] = ['Technical','Non-Technical','NGO','Gaming']
   
   formErrors = {
-    'eventname': '',
-    'tagline': '',
+    'eventName': '',
+    'tagLine': '',
     'description': '',
     'category': '',
     'organiser': '',
     'price': '',
-    'date': '',
-    'time': '',
+    'eventDate': '',
+    'eventTime': '',
     'venue': ''
   };
 
   validationMessages = {
-    eventname: {
+    eventName: {
       minlength:'Email must be at least 4 characters long.',
       required:'Email is required.'
     },
-    tagline: {
+    tagLine: {
       required:      'Tag line is required.',
       minlength:     'Tag line must be at least 2 characters long.',
       maxlength:     'Last Name cannot be more than 45 characters long.'
@@ -87,10 +88,10 @@ export class CreateEventComponent implements OnInit {
     price: {
       required:      'Price is required.'
     },
-    date: {
+    eventDate: {
       'required':      'Date is required.'
     },
-    time: {
+    eventTime: {
       required:      'Time is required.'
     },
     venue: {
@@ -108,13 +109,13 @@ export class CreateEventComponent implements OnInit {
 
   createEventForm(){
     this.eventForm = this.fb.group({
-      eventname: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(25)]],
-      tagline: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(45)]],
+      eventName: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(25)]],
+      tagLine: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(45)]],
       description: ['', [Validators.required,Validators.minLength(20),Validators.maxLength(150)]],
       organiser: ['', [Validators.required]],
       price: ['', [Validators.required]],
-      date: ['', [Validators.required]],
-      time: ['', [Validators.required]],
+      eventDate: ['', [Validators.required]],
+      eventTime: ['', [Validators.required]],
       venue: ['', [Validators.required]],
       category: 'Technical'
     });
@@ -189,6 +190,7 @@ export class CreateEventComponent implements OnInit {
     this.eventForm.reset();
     this.feedbackFormDirective.resetForm();
     console.log(this.event);
+    this.neweventservice.submitEvent(this.event).subscribe((data) => console.log(data));
   }
 
   onFeedSubmit() {
@@ -199,7 +201,7 @@ export class CreateEventComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.neweventservice.getEventsWithID().subscribe((data) => {this.event = data});
+    this.neweventservice.getEventsWithID().subscribe((data) => {this.eventfeed = data;console.log(this.eventfeed)});
   }
 
   matcher = new MyErrorStateMatcher();

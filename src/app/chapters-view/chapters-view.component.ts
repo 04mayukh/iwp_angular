@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Comment } from '../shared/comment'
+import { ChaptersService } from '../services/chapters.service'
+
+
 @Component({
   selector: 'app-chapters-view',
   templateUrl: './chapters-view.component.html',
@@ -7,7 +10,8 @@ import { Comment } from '../shared/comment'
 })
 export class ChaptersViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private chapterservice:ChaptersService) { }
+  chapters:any
 
   comments: Comment[]=[
     {
@@ -29,6 +33,7 @@ export class ChaptersViewComponent implements OnInit {
       "date": "2015-02-13T17:57:28.556094Z"
     }]
   ngOnInit() {
+    this.chapterservice.getChapters().subscribe((data) => {this.chapters=data;console.log(this.chapters.chapters)})
   }
 
 }

@@ -40,9 +40,10 @@ export class AttendanceComponent implements OnInit {
 
     for (num = 0; num < data.length; num++) {
       y = data[num]._id;
-      x[y] = false;
+      x[y] = data[num].attended;
       // console.log(y)
     }
+    console.log(x);
     this.createForm(x);
 
   }
@@ -50,6 +51,18 @@ export class AttendanceComponent implements OnInit {
   onSubmit(){
     this.finalAttendance = this.attendanceForm.value;
     console.log(this.finalAttendance);
+
+    var num: number;
+    var key: any;
+    var attended_flag: any;
+    var data = this.participants
+    for (num = 0; num < this.participants.length; num++) {
+      key = data[num]._id;
+      // console.log(this.finalAttendance[key]);
+      attended_flag = this.finalAttendance[key];
+      data[num].attended = attended_flag;
+    }
+    console.log(data);
   }
 
 }

@@ -16,7 +16,7 @@ export class EventdetailService {
   }
 
   getEvents(): Observable<any>{
-    return of(EVENTS);
+    return this.restangular.one('api/all/events').get();;;
   }
 
   getEventsByChapter(id:number): Observable<any>{
