@@ -1,3 +1,242 @@
-<p>
-  register works!
-</p>
+<div class="bg">
+<!-- <div class="layout">  -->
+    <mat-horizontal-stepper class="step" [linear]="isLinear" #stepper>
+        <mat-step>
+            <ng-template matStepLabel>Select your role:</ng-template>
+            <div class="button">
+                <button type="button" mat-stroked-button color="accent" (click)="buildForm('student')">Student</button>
+                <button type="button" mat-stroked-button color="accent" (click)="buildForm('organisation')">Organisation</button>
+                <button type="button" mat-stroked-button color="accent" (click)="buildForm('faculty')">Faculty</button>
+              </div>
+              <button type="button" mat-stroked-button color="primary" matStepperNext>Next</button>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Fill the details:</ng-template>
+            <div class="login">
+                <div *ngIf="created" class="form">
+                  <form novalidate [formGroup]="registerForm" #lform="ngForm" (ngSubmit)="onSubmit()">
+                    <fieldset>
+                      <legend> {{formType}} Registration Form </legend>
+                      <p>
+                        <mat-form-field class="input-align">
+                          <input matInput formControlName="name" placeholder="Name" type="text" [errorStateMatcher]="matcher" required>
+                          <mat-error *ngIf="formErrors.name">{{formErrors.name}}</mat-error>
+                        </mat-form-field>
+                      </p>
+                      <p>
+                          <mat-form-field class="input-align">
+                            <input matInput formControlName="email" placeholder="Email" type="text" [errorStateMatcher]="matcher" required>
+                            <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
+                          </mat-form-field>
+                        </p>
+                      <p>
+                        <mat-form-field class="input-align">
+                          <input matInput formControlName="username" placeholder="Username" type="text" [errorStateMatcher]="matcher" required>
+                          <mat-error *ngIf="formErrors.username">{{formErrors.username}}</mat-error>
+                        </mat-form-field>
+                      </p>
+                      <p>
+                          <mat-form-field class="input-align">
+                            <input matInput formControlName="password" placeholder="Password" type="password" [errorStateMatcher]="matcher" required>
+                            <mat-error *ngIf="formErrors.password">{{formErrors.password}}</mat-error>
+                          </mat-form-field>
+                        </p>   
+                      <p>
+                        <mat-form-field class="input-align">
+                          <input matInput formControlName="description" placeholder="Description" type="text" [errorStateMatcher]="matcher" required>
+                          <mat-error *ngIf="formErrors.description">{{formErrors.description}}</mat-error>
+                        </mat-form-field>
+                      </p>
+                      <p>
+                          <mat-form-field class="input-align">
+                            <input matInput formControlName="phone" placeholder="Phone Number" type="text" [errorStateMatcher]="matcher" required>
+                            <mat-error *ngIf="formErrors.phone">{{formErrors.phone}}</mat-error>
+                          </mat-form-field>
+                        </p>
+            
+                      <!-- Student Specififc -->
+                      <div *ngIf="stud">
+                        <p>
+                          <mat-form-field class="input-align">
+                            <input matInput formControlName="gender" placeholder="Gender" type="text" [errorStateMatcher]="matcher" required>
+                            <mat-error *ngIf="formErrors.gender">{{formErrors.gender}}</mat-error>
+                          </mat-form-field>
+                        </p>
+                        <p>
+                          <mat-form-field class="input-align">
+                            <input matInput formControlName="regNo" placeholder="Registration Number" type="text" [errorStateMatcher]="matcher" required>
+                            <mat-error *ngIf="formErrors.gender">{{formErrors.gender}}</mat-error>
+                          </mat-form-field>
+                        </p>
+                        <p>
+                            <mat-form-field class="input-align">
+                              <input matInput placeholder="Skill" type="text" (blur)="onKey($event)">
+                            </mat-form-field>
+                            <span>
+                            <button style="display: inline;" type="button" mat-icon-button color="primary" (click)="addSkill()">
+                                <mat-icon >add</mat-icon>
+                                Click to add skill.
+                            </button>
+                          </span>
+                          </p>
+                      </div> 
+                      <!-- organisation Specific -->
+                      <div *ngIf="chapter">
+                          <p>
+                              <mat-form-field class="input-align">
+                                <input matInput formControlName="domain" placeholder="Domain" type="text" [errorStateMatcher]="matcher" required>
+                                <mat-error *ngIf="formErrors.domain">{{formErrors.domain}}</mat-error>
+                              </mat-form-field>
+                            </p>
+                            <p>
+                                <mat-form-field class="input-align">
+                                  <input matInput formControlName="moto" placeholder="Motto" type="text" [errorStateMatcher]="matcher" required>
+                                  <mat-error *ngIf="formErrors.moto">{{formErrors.moto}}</mat-error>
+                                </mat-form-field>
+                              </p>
+                      </div>
+            
+                      <!-- Faculty specific -->
+                      <div *ngIf="facul">
+                          <p>
+                              <mat-form-field class="input-align">
+                                <input matInput formControlName="school" placeholder="School" type="text" [errorStateMatcher]="matcher" required>
+                                <mat-error *ngIf="formErrors.school">{{formErrors.school}}</mat-error>
+                              </mat-form-field>
+                            </p>
+                            <p>
+                                <mat-form-field class="input-align">
+                                  <input matInput formControlName="gender" placeholder="Gender" type="text" [errorStateMatcher]="matcher" required>
+                                  <mat-error *ngIf="formErrors.gender">{{formErrors.gender}}</mat-error>
+                                </mat-form-field>
+                              </p>
+                      </div>
+                      <p>
+                        <button mat-button matStepperNext type="submit" [disabled]="registerForm.invalid"  class="background-primary text-floral-white align">Submit</button>
+                      </p>
+                    </fieldset>
+                  </form>
+                      <p>{{ registerForm.value | json }}</p>
+                </div>
+              </div>
+              <button type="button" mat-stroked-button color="primary" matStepperPrevious>Back</button>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          You are successfully registered.
+          <div>
+            <button mat-stroked-button color="primary" routerLink="/login" (click)="stepper.reset()">Login</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    <!-- </div> -->
+</div>
+
+<!-- 
+  <div>
+    <div class="button">
+      <button mat-stroked-button color="accent" (click)="buildForm('student')">Student</button>
+      <button mat-stroked-button color="accent" (click)="buildForm('organisation')">Organisation</button>
+      <button mat-stroked-button color="accent" (click)="buildForm('faculty')">Faculty</button>
+    </div>
+  </div>
+  <div class="login">
+    <div *ngIf="created" class="form">
+      <form novalidate [formGroup]="registerForm" #lform="ngForm" (ngSubmit)="onSubmit()">
+        <fieldset>
+          <legend> {{formType}} Registration Form </legend>
+          <p>
+            <mat-form-field class="input-align">
+              <input matInput formControlName="name" placeholder="Name" type="text" [errorStateMatcher]="matcher" required>
+              <mat-error *ngIf="formErrors.name">{{formErrors.name}}</mat-error>
+            </mat-form-field>
+          </p>
+          <p>
+              <mat-form-field class="input-align">
+                <input matInput formControlName="email" placeholder="Email" type="text" [errorStateMatcher]="matcher" required>
+                <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
+              </mat-form-field>
+            </p>
+          <p>
+            <mat-form-field class="input-align">
+              <input matInput formControlName="username" placeholder="Username" type="text" [errorStateMatcher]="matcher" required>
+              <mat-error *ngIf="formErrors.username">{{formErrors.username}}</mat-error>
+            </mat-form-field>
+          </p>
+          <p>
+              <mat-form-field class="input-align">
+                <input matInput formControlName="password" placeholder="Password" type="password" [errorStateMatcher]="matcher" required>
+                <mat-error *ngIf="formErrors.password">{{formErrors.password}}</mat-error>
+              </mat-form-field>
+            </p>   
+          <p>
+            <mat-form-field class="input-align">
+              <input matInput formControlName="description" placeholder="Description" type="text" [errorStateMatcher]="matcher" required>
+              <mat-error *ngIf="formErrors.description">{{formErrors.description}}</mat-error>
+            </mat-form-field>
+          </p>
+          <p>
+              <mat-form-field class="input-align">
+                <input matInput formControlName="phone" placeholder="Phone Number" type="text" [errorStateMatcher]="matcher" required>
+                <mat-error *ngIf="formErrors.phone">{{formErrors.phone}}</mat-error>
+              </mat-form-field>
+            </p>
+
+          
+          <div *ngIf="stud">
+            <p>
+              <mat-form-field class="input-align">
+                <input matInput formControlName="gender" placeholder="Gender" type="text" [errorStateMatcher]="matcher" required>
+                <mat-error *ngIf="formErrors.gender">{{formErrors.gender}}</mat-error>
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field class="input-align">
+                <input matInput formControlName="regNo" placeholder="Registration Number" type="text" [errorStateMatcher]="matcher" required>
+                <mat-error *ngIf="formErrors.gender">{{formErrors.gender}}</mat-error>
+              </mat-form-field>
+            </p>
+          </div> 
+          
+          <div *ngIf="chapter">
+              <p>
+                  <mat-form-field class="input-align">
+                    <input matInput formControlName="domain" placeholder="Domain" type="text" [errorStateMatcher]="matcher" required>
+                    <mat-error *ngIf="formErrors.domain">{{formErrors.domain}}</mat-error>
+                  </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="input-align">
+                      <input matInput formControlName="moto" placeholder="Motto" type="text" [errorStateMatcher]="matcher" required>
+                      <mat-error *ngIf="formErrors.moto">{{formErrors.moto}}</mat-error>
+                    </mat-form-field>
+                  </p>
+          </div>
+
+      
+          <div *ngIf="facul">
+              <p>
+                  <mat-form-field class="input-align">
+                    <input matInput formControlName="school" placeholder="School" type="text" [errorStateMatcher]="matcher" required>
+                    <mat-error *ngIf="formErrors.school">{{formErrors.school}}</mat-error>
+                  </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="input-align">
+                      <input matInput formControlName="gender" placeholder="Gender" type="text" [errorStateMatcher]="matcher" required>
+                      <mat-error *ngIf="formErrors.gender">{{formErrors.gender}}</mat-error>
+                    </mat-form-field>
+                  </p>
+          </div>
+
+
+          <p>
+            <button type="submit" [disabled]="registerForm.invalid" mat-button class="background-primary text-floral-white align">Submit</button>
+          </p>
+        </fieldset>
+      </form>
+
+
+          <p>{{ registerForm.value | json }}</p>
+    </div>
+  </div> -->

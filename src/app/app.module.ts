@@ -12,8 +12,7 @@ import { FeedComponent } from './feed/feed.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatTableModule} from '@angular/material/table';
-
-
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 import { ReactiveFormsModule } from '@angular/forms'; 
@@ -110,6 +109,7 @@ import { RegisterComponent } from './register/register.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTableModule,
+    MatStepperModule,
     RestangularModule.forRoot(RestangularConfigFactory)
   ],
   providers: [FeedService,ProfileService,EventdetailService,FeedbackService,{provide: 'BaseURL', useValue: baseURL}],

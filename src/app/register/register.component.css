@@ -1,0 +1,71 @@
+*{
+    margin: 0px;
+}
+.step{
+    width: 60%;
+    border-radius: 20px;
+    position: relative;
+}
+
+.bg{
+    background: url("../../assets/images/form_bg.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 80vh;
+    padding: 150px 0px;
+    position: sticky;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.login{  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px
+}
+.form{
+    background-color:white;
+    padding: 20px;
+    opacity: 1;
+    width: 95%;
+    border-radius: 15px
+}
+p{
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+}
+
+p > *{
+    width: 80%;
+    margin: auto;
+}
+
+.align{
+    text-align: center;
+}
+
+::selection{
+    background: white !important
+}
+
+.button{
+    text-align: center;
+    margin: 10px
+}
+button{
+    margin: 0px 10px
+}
+
+fieldset{
+    border: 1px solid #5e445f;
+    border-radius: 10px;
+}
+legend{
+    font-size: 20px;
+
+}
