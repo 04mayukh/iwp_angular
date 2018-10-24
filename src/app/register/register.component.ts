@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Restangular } from 'ngx-restangular';
 
 import {ErrorStateMatcher} from '@angular/material/core';
 import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
@@ -22,7 +23,7 @@ export class RegisterComponent implements OnInit {
   @ViewChild('rform') registerFormDirective;
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder,private restangular: Restangular) { 
   }
 
   student: any ={
@@ -50,7 +51,7 @@ export class RegisterComponent implements OnInit {
     role: ['', [Validators.required]], 
     domain: ['', [Validators.required]], 
     moto: ['', [Validators.required]], 
-    board: ['', [Validators.required]]    
+    board: ['']    
   }
 
   faculty: any = {
@@ -149,6 +150,7 @@ export class RegisterComponent implements OnInit {
       console.log(this.registerForm.value);
     }
     if(cat == 'organisation'){
+      cat = "organization"
       this.formType = "Organisation"
       this.chapter = true;
       this.stud = false;
@@ -181,9 +183,21 @@ export class RegisterComponent implements OnInit {
     this.registerForm.patchValue({'skills':this.skills})
 
   }
+  register: any = false;
+
+  reset(){
+    this.registerForm.reset();
+  }
 
   onSubmit(){
-    console.log(this.registerForm.value);
+    console.log(this.registerForm.value);   
+    this.restangular.all('api/auth/register').post(this.registerForm.value).subscribe((data) => {
+      this.registerForm.reset();
+      if(data.success){
+        this.register = true
+      } 
+      console.log(data)
+    })
   }
 
   onValueChanged(data?: any) {

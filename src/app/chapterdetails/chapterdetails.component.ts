@@ -26,7 +26,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class ChapterdetailsComponent implements OnInit {
 
-  events: any[];
   @ViewChild('fform') feedbackFormDirective;
   feedbackForm: FormGroup;
   feedback: any;
@@ -118,12 +117,24 @@ export class ChapterdetailsComponent implements OnInit {
     this.location.back();
   }
   chapter: any;
-
+  upcomingEvents: any;
+  pastEvents: any;
   ngOnInit() {
     console.log("lol");
-    const id = +this.route.snapshot.params['id'];
-    this.eventdetailservice.getEventsByChapter(id).subscribe(events => this.events = events);
-    this.chapterservice.getChapterById(id).subscribe((data) => {this.chapter = data;console.log(this.chapter)});
+    const id = this.route.snapshot.params['id'];
+    this.chapterservice.getChapterById(id).subscribe((data) => {
+      this.chapter = data.organization;
+      console.log(this.chapter)
+
+      this.eventdetailservice.getEventsByChapter(id).subscribe(events => 
+        {
+          console.log(events)
+          this.upcomingEvents = events.upcomingEvents;
+          this.pastEvents = events.conductedEvents
+          console.log(this.upcomingEvents);
+          console.log(this.pastEvents)
+        });
+    });
   }
 
 }

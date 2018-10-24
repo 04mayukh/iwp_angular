@@ -116,16 +116,18 @@
                       </p>
                     </fieldset>
                   </form>
-                      <p>{{ registerForm.value | json }}</p>
+                      <!-- <p>{{ registerForm.value | json }}</p> -->
                 </div>
               </div>
               <button type="button" mat-stroked-button color="primary" matStepperPrevious>Back</button>
         </mat-step>
         <mat-step>
           <ng-template matStepLabel>Done</ng-template>
-          You are successfully registered.
+          <p *ngIf="register">You are successfully registered.</p>
+          <p *ngIf="!register">Registration Failed</p>
           <div>
-            <button mat-stroked-button color="primary" routerLink="/login" (click)="stepper.reset()">Login</button>
+            <button *ngIf="register" mat-stroked-button color="primary" routerLink="/login" (click)="stepper.reset()">Login</button>
+            <button *ngIf="!register" mat-stroked-button color="primary" (click)="stepper.reset()">Retry</button>
           </div>
         </mat-step>
       </mat-horizontal-stepper>

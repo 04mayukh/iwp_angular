@@ -1,5 +1,5 @@
 <div class="card-holder" *ngIf="events">
-      <mat-card class="card" *ngFor="let event of events.posts">
+      <mat-card class="card" *ngFor="let event of events.posts;let i = index">
           <mat-card-header>
             <mat-list>
                 <mat-list-item>
@@ -20,11 +20,52 @@
               {{event.description}}
             </p>
           </mat-card-content>
+
           <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button [routerLink]="['/user/event', event.event]">More Details</button>
+            <button mat-icon-button color="primary" *ngIf="event.liked" (click)="liked(event._id,i)">
+                <mat-icon>thumb_up_alt</mat-icon>
+            </button>
+            
+            <button mat-icon-button *ngIf="!event.liked" (click)="liked(event._id,i)">
+                <mat-icon>thumb_up_alt</mat-icon >
+            </button>
+            <button mat-button *ngIf="event.liked" (click)="liked(event._id,i)">LIKED</button>
+            <button mat-button *ngIf="!event.liked" (click)="liked(event._id,i)">LIKE</button >
+            <button mat-button [routerLink]="['/user/event', event.eventId]">More Details</button>
             <button mat-button>Register</button>
             <span class="flex-spacer"></span>
           </mat-card-actions>
         </mat-card>
 </div>    
+
+
+<!-- <div class="card-holder">
+    <mat-card class="card">
+        <mat-card-header>
+          <mat-list>
+              <mat-list-item>
+                      <img matListAvatar src="/assets/images/alberto.png">
+                      <h3 matLine> Name</h3>
+                      <p matLine>
+                          <span> hsdbjadbcaj</span>
+                      </p>
+              </mat-list-item>
+          </mat-list> 
+        </mat-card-header>
+        <img class="card" mat-card avatar src="/assets/images/jumble.png"  height="400px">
+        <mat-card-content>
+          <h3>
+            fgosdfnvlkn     
+          </h3>
+          <p>
+            zksjdvnjansdvjk
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="likeFeed()">LIKE</button>
+          <button mat-button [routerLink]="['/user/event', 1]">More Details</button>
+          <button mat-button>Register</button>
+          <span class="flex-spacer"></span>
+        </mat-card-actions>
+      </mat-card>
+</div>     -->
