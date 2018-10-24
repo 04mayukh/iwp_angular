@@ -23,7 +23,4 @@ export class EventdetailService {
     return this.restangular.one('api/common/organization/events/'+ id).get()
   }
 
-  submitComment(comment:any): Observable<any>{
-    return of(comment);
-  }
 }

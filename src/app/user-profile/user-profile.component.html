@@ -1,31 +1,32 @@
+<div *ngIf="profile">
 <div class="profile-top">
 </div>
 <div class="profile-header">
   <div class="profile-img"><img src="../../assets/images/alberto.png" height="150px" width="150px"></div>
-  <div class="profile-head"><h4>{{profile.user.name}}</h4><h4>{{profile.user.role}}</h4></div>
+  <div class="profile-head"><h4>{{profile.userId.name}}</h4><h4>{{profile.userId.role}}</h4></div>
 </div>
 
 <div class="about-section">
   <div class="about">
     <h5>About</h5>
-    <p>{{profile.user.description}}</p>
+    <p>{{profile.userId.description}}</p>
   </div>
   <div class="interests">
     <div>
       <h5>Skills</h5>
-      <p *ngFor="let skill of profile.user.skills">{{skill}}</p>
+      <p *ngFor="let skill of profile.skills">{{skill}}</p>
     </div>
   </div>
 </div>
 
-<div class="upcoming-events">
+<div class="upcoming-events" *ngIf="events">
     <mat-tab-group>
         <mat-tab label="Registered Events">
             <mat-accordion>
                 <mat-expansion-panel *ngFor="let event of upcomingEvent">
                   <mat-expansion-panel-header>
                     <mat-panel-title>
-                      {{event.event_name}}
+                      {{event.eventName}}
                     </mat-panel-title>
                     <mat-panel-description>
                       Conducted By {{event.organiser}}
@@ -33,7 +34,7 @@
                   </mat-expansion-panel-header>
                   <p>Event Description</p>
                   <p>{{event.description}}</p>
-                  <button mat-raised-button color="primary" [routerLink]="['/user/event', event.id]">View Details</button>
+                  <button mat-raised-button color="primary" [routerLink]="['/user/event', event._id]">View Details</button>
                 </mat-expansion-panel>
               </mat-accordion>
         </mat-tab>
@@ -44,7 +45,7 @@
             <mat-expansion-panel *ngFor="let event of pastEvent">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  {{event.event_name}}
+                  {{event.eventName}}
                 </mat-panel-title>
                 <mat-panel-description>
                   Conducted By {{event.organiser}}
@@ -52,9 +53,10 @@
               </mat-expansion-panel-header>
               <p>Event Description</p>
               <p>{{event.description}}</p>
-              <button mat-raised-button color="primary">View Details</button>
+              <button mat-raised-button color="primary" [routerLink]="['/user/event', event._id]">View Details</button>
             </mat-expansion-panel>
           </mat-accordion>
         </mat-tab>
       </mat-tab-group>
+</div>
 </div>

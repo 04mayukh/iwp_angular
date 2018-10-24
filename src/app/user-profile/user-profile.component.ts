@@ -11,13 +11,25 @@ export class UserProfileComponent implements OnInit {
   profile: any;
   pastEvent: any;
   upcomingEvent: any;
+  events: any;
 
   constructor(private profileservice: ProfileService) { }
 
   ngOnInit() {
-    this.profileservice.getProfile().subscribe(profile => {this.profile=profile;console.log(this.profile.user)});
-    this.profileservice.getPastEvent().subscribe(pastevent => this.pastEvent=pastevent);
-    this.profileservice.getFutureEvent().subscribe(upcomingEvent => this.upcomingEvent=upcomingEvent);
+    this.profileservice.getProfile().subscribe(profile => {
+      this.profile=profile.user;
+      console.log(this.profile)
+    
+      this.profileservice.getEvents().subscribe((data) => {
+        console.log(data);
+        this.events = data;
+        this.pastEvent = data.attendedEvents;
+        this.upcomingEvent = data.registeredEvents;
+        console.log(this.pastEvent);
+      });
+    
+    });
+    
   }
 
 }

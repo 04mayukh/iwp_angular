@@ -17,12 +17,8 @@ export class ProfileService {
     return this.restangular.one('api/student/details').get();
   }
 
-  getFutureEvent(): Observable<any>{
-    return of(EVENTS);
+  getEvents(): Observable<any>{
+    return this.restangular.one('api/student/events').get();
   } 
-
-  getPastEvent(): Observable<any>{
-    return of(EVENTS);
-  }
 
 }

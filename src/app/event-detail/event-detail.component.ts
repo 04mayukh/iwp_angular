@@ -9,6 +9,7 @@ import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
 
 import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Restangular } from 'ngx-restangular';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -46,7 +47,7 @@ export class EventDetailComponent implements OnInit {
     };  
 
 
-  constructor(private fb: FormBuilder, private eventdetailservice: EventdetailService,private route: ActivatedRoute,private location: Location) {
+  constructor(private fb: FormBuilder, private eventdetailservice: EventdetailService,private route: ActivatedRoute,private location: Location, private restangular: Restangular) {
     this.createForm();
    }
    createForm(){
@@ -80,24 +81,25 @@ export class EventDetailComponent implements OnInit {
     }
   }
 
+  id: any;
   ngOnInit() {
-    const id = this.route.snapshot.params['id'];
-    console.log(id);
+    this.id = this.route.snapshot.params['id'];
+    console.log(this.id);
     // this.eventdetailservice.getEventbyId(id).subscribe(event => {this.event = event.events;console.log(event.events)});
-    this.eventdetailservice.getEventbyId(id).subscribe(event => {this.event = event;console.log(event)});
+    this.eventdetailservice.getEventbyId(this.id).subscribe(event => {this.event = event.event;console.log(this.event)});
   }
 
   onSubmit(){
     this.newcomment = this.commentForm.value;
     const date: Date = new Date();
     this.newcomment.date = date.toISOString();
-    this.commentForm.reset();
-    this.feedbackFormDirective.resetForm({rating:5,author:'',comment:''});
-    this.event.comments.push(this.newcomment);
-    console.log(this.newcomment);
-    this.eventdetailservice.submitComment(this.newcomment).subscribe((data) =>console.log(data));
-    //This should be copy
-    // this.dishcopy.save().subscribe(dish => this.dishh = dish);
+    console.log(this.newcomment)
+    this.restangular.all('api/events/'+this.id+'/comment').post(this.newcomment).subscribe((res) => {
+      console.log(res);
+      this.commentForm.reset();
+      this.feedbackFormDirective.resetForm({rating:5,author:'',comment:''});
+      this.event.comments.push(this.newcomment);
+    });
   }
 
   goBack(): void {
