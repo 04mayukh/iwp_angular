@@ -33,6 +33,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { baseURL } from './shared/baseurl';
 import { RestangularModule, Restangular } from 'ngx-restangular';
 import { RestangularConfigFactory } from './shared/restConfig';
+import { SocialLoginModule,AuthServiceConfig,GoogleLoginProvider,FacebookLoginProvider} from "angular-6-social-login";
+import { getAuthServiceConfigs } from './shared/social'
 
 
 import 'hammerjs';
@@ -62,6 +64,7 @@ import { AttendanceComponent } from './attendance/attendance.component';
 import { ChapterAttendanceComponent } from './chapter-attendance/chapter-attendance.component';
 import { ViewAttendanceComponent } from './view-attendance/view-attendance.component';
 import { RegisterComponent } from './register/register.component';
+import { GoogleAuthComponent } from './google-auth/google-auth.component';
 
 
 
@@ -84,7 +87,8 @@ import { RegisterComponent } from './register/register.component';
     AttendanceComponent,
     ChapterAttendanceComponent,
     ViewAttendanceComponent,
-    RegisterComponent
+    RegisterComponent,
+    GoogleAuthComponent
   ],
   imports: [
     BrowserModule,
@@ -110,9 +114,13 @@ import { RegisterComponent } from './register/register.component';
     MatNativeDateModule,
     MatTableModule,
     MatStepperModule,
+    SocialLoginModule,
     RestangularModule.forRoot(RestangularConfigFactory)
   ],
-  providers: [FeedService,ProfileService,EventdetailService,FeedbackService,{provide: 'BaseURL', useValue: baseURL}],
+  providers: [FeedService,ProfileService,EventdetailService,FeedbackService,{provide: 'BaseURL', useValue: baseURL},{
+    provide: AuthServiceConfig,
+    useFactory: getAuthServiceConfigs
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -8,7 +8,8 @@
   <mat-card-content>
           <p class="row" *ngFor="let participant of participants">
             <span>{{participant.name}}</span>
-            <span>Present</span>
+            <span *ngIf="participant.attended">Present</span>
+            <span *ngIf="!participant.attended">Absent</span>
           </p>
   </mat-card-content>
   <!-- <mat-card-actions>

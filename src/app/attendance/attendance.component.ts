@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AttendanceService } from '../services/attendance.service';
 import { Params, ActivatedRoute } from '@angular/router';
+import { Restangular } from 'ngx-restangular';
 
 
 @Component({
@@ -16,20 +17,23 @@ export class AttendanceComponent implements OnInit {
   participants: any[];
   aformData: any;
   finalAttendance:any;
-  constructor(private fb: FormBuilder,private route: ActivatedRoute, private attendanceservice:AttendanceService) { }
+  constructor(private fb: FormBuilder,private route: ActivatedRoute, private attendanceservice:AttendanceService, private restangular: Restangular) { }
 
    createForm(x){
     this.attendanceForm = this.fb.group(x);
    }
 
 
+   created: any = false;
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
-    this.attendanceservice.getUsersByEvent(id).subscribe((data) => {
-      this.participants=data;
+    console.log(id);
+    this.attendanceservice.getUsersByevent(id).subscribe((data) => {
+      this.participants=data.users;
       console.log(this.participants);
       this.formdata(this.participants);
+      this.created = true
     })
   }
 
@@ -39,7 +43,7 @@ export class AttendanceComponent implements OnInit {
     var num: number;
 
     for (num = 0; num < data.length; num++) {
-      y = data[num]._id;
+      y = data[num].userId;
       x[y] = data[num].attended;
       // console.log(y)
     }
@@ -57,12 +61,14 @@ export class AttendanceComponent implements OnInit {
     var attended_flag: any;
     var data = this.participants
     for (num = 0; num < this.participants.length; num++) {
-      key = data[num]._id;
+      key = data[num].userId;
       // console.log(this.finalAttendance[key]);
       attended_flag = this.finalAttendance[key];
       data[num].attended = attended_flag;
     }
     console.log(data);
+    const id = this.route.snapshot.params['id'];
+    this.restangular.all('api/organization/'+id+'/post-attendance').post().subscribe((data) => console.log(data))
   }
 
 }

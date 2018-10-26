@@ -1,6 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Restangular } from 'ngx-restangular';
+import {
+  AuthService,
+  FacebookLoginProvider,
+  GoogleLoginProvider
+} from 'angular-6-social-login';
+
 
 import {ErrorStateMatcher} from '@angular/material/core';
 import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
@@ -23,13 +29,13 @@ export class RegisterComponent implements OnInit {
   @ViewChild('rform') registerFormDirective;
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder,private restangular: Restangular) { 
+  constructor(private fb: FormBuilder,private restangular: Restangular,private socialAuthService: AuthService) { 
   }
 
   student: any ={
     name: ['', [Validators.required,Validators.minLength(4)]],
     username: ['', [Validators.required]],
-    email: ['', [Validators.required]],
+    email: ['', [Validators.required,Validators.pattern]],
     description: ['', [Validators.required]],
     password: ['', [Validators.required]],
     phone: ['', [Validators.required]],
@@ -92,7 +98,8 @@ export class RegisterComponent implements OnInit {
       required:'This field is required.'
     },
     email:{
-      required:'This field is required.'
+      required:'This field is required.',
+      pattern:'Not a valid VIT email Id'
     },
     description:{
       required:'This field is required.'
@@ -222,6 +229,28 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
   }
+  google: any = false
+  public socialSignIn(socialPlatform : string) {
+    console.log("haha");
+    let socialPlatformProvider;
+
+      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    
+    this.socialAuthService.signIn(socialPlatformProvider).then(
+      (userData) => {
+        var formMail = this.registerForm.value.email;
+        console.log(formMail)
+        if(formMail == userData.email){
+          this.google = true
+          console.log("haha");
+          console.log(socialPlatform+" sign in data : " , userData);
+          this.socialAuthService.signOut()
+        } 
+      }
+    );
+  }
+
+
 
   matcher = new MyErrorStateMatcher();
 

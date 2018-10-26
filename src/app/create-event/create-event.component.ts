@@ -32,7 +32,7 @@ export class CreateEventComponent implements OnInit {
   events: any[];
   formErrorsfeed = {
     'description': '',
-    'event_id': '',
+    'eventId': '',
     'image':'',
     'name':''
   };
@@ -42,7 +42,7 @@ export class CreateEventComponent implements OnInit {
       maxlength:'Cannot be more than 150 words',
       required:'Description is required.'
     },
-    event:{
+    eventId:{
       required:'Event is required.'
     },
     image:{
@@ -135,7 +135,7 @@ export class CreateEventComponent implements OnInit {
   createFeedForm(){
     this.loginForm = this.fb.group({
       name: ['', [Validators.required]],
-      event: ['', [Validators.required]],
+      eventId: ['', [Validators.required]],
       description: ['', [Validators.required,Validators.minLength(4)]],
       // file: ['', Validators.required]
     });
@@ -208,7 +208,6 @@ export class CreateEventComponent implements OnInit {
     console.log(this.newFeed)
     this.loginForm.reset();
     this.feedFormDirective.resetForm();
-    console.log(this.newFeed);
     this.restangular.all('api/posts/write-post').post(this.newFeed).subscribe((data) => console.log(data))
   }
 

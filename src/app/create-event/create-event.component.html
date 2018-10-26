@@ -72,7 +72,7 @@
         <div class="event-form">
         <form class="eventForm" novalidate [formGroup]="loginForm" #lform="ngForm" (ngSubmit)="onFeedSubmit()">
             <p>
-                <mat-select placeholder="Events" formControlName="event" required>
+                <mat-select placeholder="Events" formControlName="eventId" required>
                     <mat-option *ngFor="let ctype of eventfeed" [value]="ctype._id">
                       {{ ctype.eventName }}
                     </mat-option>

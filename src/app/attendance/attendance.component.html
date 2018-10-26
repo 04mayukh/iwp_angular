@@ -1,9 +1,9 @@
 
-<div class="attendance">
+<div class="attendance" *ngIf="created">
     <p>{{ attendanceForm.value | json }}</p>
 </div>
 
-<mat-card class="example-card">
+<mat-card class="example-card" *ngIf="created">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>Event Name</mat-card-title>
@@ -14,7 +14,7 @@
         <form class="form" novalidate [formGroup]="attendanceForm" #aform="ngForm" (ngSubmit)="onSubmit()">
             <p class="row" *ngFor="let participant of participants">
               <span>{{participant.name}}</span>
-              <mat-slide-toggle formControlName="{{participant._id}}"></mat-slide-toggle>
+              <mat-slide-toggle formControlName="{{participant.userId}}"></mat-slide-toggle>
             <p>
               <br>
               <button type="submit" mat-stroked-button color="accent">Submit</button>

@@ -16,8 +16,8 @@ export class ViewAttendanceComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
-    this.attendanceservice.getUsersByEvent(id).subscribe((data) => {
-      this.participants=data;
+    this.attendanceservice.getUsersByevent(id).subscribe((data) => {
+      this.participants=data.users;
       console.log(this.participants);
     })
   }

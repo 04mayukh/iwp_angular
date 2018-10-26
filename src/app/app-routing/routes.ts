@@ -16,7 +16,8 @@ import { CreateEventComponent } from '../create-event/create-event.component';
 import { AttendanceComponent } from '../attendance/attendance.component';
 import { ChapterAttendanceComponent } from '../chapter-attendance/chapter-attendance.component';
 import { ViewAttendanceComponent } from '../view-attendance/view-attendance.component';
-import { RegisterComponent } from '../register/register.component'
+import { RegisterComponent } from '../register/register.component';
+import { GoogleAuthComponent } from '../google-auth/google-auth.component'
 
 export const routes: Routes = [
     { path: 'login' ,component: LoginComponent},
@@ -43,5 +44,6 @@ export const routes: Routes = [
             { path: 'viewAttendance/:id',component: ViewAttendanceComponent}
         ]},
     { path: '', redirectTo: '/login', pathMatch: 'full' },
-    { path: 'register' ,component: RegisterComponent}
+    { path: 'register' ,component: RegisterComponent},
+    { path: 'google' ,component: GoogleAuthComponent}
 ];

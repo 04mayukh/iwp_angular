@@ -24,8 +24,14 @@
                         </mat-form-field>
                       </p>
                       <p>
-                          <mat-form-field class="input-align">
-                            <input matInput formControlName="email" placeholder="Email" type="text" [errorStateMatcher]="matcher" required>
+                          <mat-form-field class="input-align" *ngIf="stud">
+                            <input matInput formControlName="email" placeholder="Email" type="text" [errorStateMatcher]="matcher" required pattern="[a-zA-Z0-9.]+@vitstudent.ac.in">
+                            <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
+                          </mat-form-field>
+                        </p>
+                        <p>
+                          <mat-form-field class="input-align" *ngIf="!stud">
+                            <input matInput formControlName="email" placeholder="Email" type="text" [errorStateMatcher]="matcher" required >
                             <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
                           </mat-form-field>
                         </p>
@@ -111,9 +117,10 @@
                                 </mat-form-field>
                               </p>
                       </div>
-                      <p>
-                        <button mat-button matStepperNext type="submit" [disabled]="registerForm.invalid"  class="background-primary text-floral-white align">Submit</button>
-                      </p>
+                      <button class="log" mat-stroked-button color="accent" *ngIf="!google" (click)="socialSignIn('google')" [disabled]="registerForm.invalid">Verify VIT ID</button>
+                      
+                      <button class="log" mat-button matStepperNext type="submit" [disabled]="registerForm.invalid"  class="background-primary text-floral-white align" *ngIf="google">Submit</button>
+                      
                     </fieldset>
                   </form>
                       <!-- <p>{{ registerForm.value | json }}</p> -->
