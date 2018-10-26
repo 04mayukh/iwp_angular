@@ -14,6 +14,6 @@ export class ChaptereventschComponent implements OnInit {
   constructor(private eventdetailservice: EventdetailService) { }
 
   ngOnInit() {
-    this.eventdetailservice.getEvents().subscribe(events => this.events = events);
+    this.eventdetailservice.getEvents().subscribe(events => {this.events = events.events;console.log(this.events)});
   }
 }

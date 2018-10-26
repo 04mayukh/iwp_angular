@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChaptersService } from '../services/chapters.service'
 
 import {ErrorStateMatcher} from '@angular/material/core';
 import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
 
-import { NeweventService } from '../services/newevent.service'
+import { NeweventService } from '../services/newevent.service';
+import { EventdetailService } from '../services/eventdetail.service';
+import { Restangular } from 'ngx-restangular';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -30,7 +33,8 @@ export class CreateEventComponent implements OnInit {
   formErrorsfeed = {
     'description': '',
     'event_id': '',
-    'image':''
+    'image':'',
+    'name':''
   };
   validationMessagesfeed = {
     description:{
@@ -38,11 +42,14 @@ export class CreateEventComponent implements OnInit {
       maxlength:'Cannot be more than 150 words',
       required:'Description is required.'
     },
-    event_id:{
+    event:{
       required:'Event is required.'
     },
     image:{
       required: 'Image is required'
+    },
+    name:{
+      required: 'Feed name is required'
     }
   };
 
@@ -102,7 +109,7 @@ export class CreateEventComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder, private neweventservice: NeweventService) {
+  constructor(private fb: FormBuilder, private neweventservice: NeweventService, private chapterservice: ChaptersService, private eventdetailservice: EventdetailService, private restangular: Restangular) {
     this.createEventForm();
     this.createFeedForm();
    }
@@ -127,7 +134,8 @@ export class CreateEventComponent implements OnInit {
   
   createFeedForm(){
     this.loginForm = this.fb.group({
-      event_id: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      event: ['', [Validators.required]],
       description: ['', [Validators.required,Validators.minLength(4)]],
       // file: ['', Validators.required]
     });
@@ -194,14 +202,30 @@ export class CreateEventComponent implements OnInit {
   }
 
   onFeedSubmit() {
+    const date: Date = new Date();
     this.newFeed = this.loginForm.value;
+    this.newFeed.date = date.toISOString();
+    console.log(this.newFeed)
     this.loginForm.reset();
     this.feedFormDirective.resetForm();
     console.log(this.newFeed);
+    this.restangular.all('api/posts/write-post').post(this.newFeed).subscribe((data) => console.log(data))
   }
 
+  profile: any;
+  upcomingEvent: any;
   ngOnInit() {
-    this.neweventservice.getEventsWithID().subscribe((data) => {this.eventfeed = data;console.log(this.eventfeed)});
+    this.chapterservice.getChapterProfile().subscribe((data) => {
+      this.profile = data.organization;
+      console.log(this.profile);
+      const id = this.profile.userId._id;
+      console.log(id)
+      this.eventdetailservice.getEventsByChapter(id).subscribe((data) =>{
+        this.upcomingEvent = data.upcomingEvents;
+        this.eventfeed = this.upcomingEvent;
+        console.log(this.eventfeed);
+      })
+    })
   }
 
   matcher = new MyErrorStateMatcher();

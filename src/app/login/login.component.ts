@@ -88,7 +88,13 @@ export class LoginComponent implements OnInit {
       //   console.log("data coming");
       //   console.log(data.posts);
       // })
-      this.router.navigate(['/', 'user']);
+      if(data.user.role == 'student'){
+        this.router.navigate(['/', 'user']);
+      }
+      if(data.user.role == 'organization'){
+        this.router.navigate(['/', 'chapter']);
+      }
+      
     });
     this.loginForm.reset();
     this.feedbackFormDirective.resetForm();    

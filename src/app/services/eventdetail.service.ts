@@ -20,7 +20,7 @@ export class EventdetailService {
   }
 
   getEventsByChapter(id:number): Observable<any>{
-    return this.restangular.one('api/common/organization/events/'+ id).get()
+    return this.restangular.one('api/events/organization-id/'+ id).get()
   }
 
 }

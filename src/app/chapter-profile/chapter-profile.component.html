@@ -1,4 +1,4 @@
-<mat-tab-group color="primary">
+<mat-tab-group color="primary" >
   <mat-tab>
     <ng-template mat-tab-label>
       <mat-icon class="example-tab-icon">local_library</mat-icon>
@@ -8,7 +8,7 @@
     </div>
       <div class="profile-header">
         <div class="profile-img"><img src="../../assets/images/alberto.png" height="150px" width="150px"></div>
-        <div class="profile-head"><h4>jndkjc</h4><h4>fjdfnvk</h4></div>
+        <div class="profile-head"><h4>{{profile.userId.name}}</h4><h4>{{profile.domain}}</h4></div>
       </div>
     <div>
       <div>
@@ -16,8 +16,7 @@
       <div class="flex">
           <div class="history">
             <h2>Our History</h2>
-            <p>Started in 2010, Ristorante con Fusion quickly established itself as a culinary icon par         excellence in Hong Kong. With its unique brand of world fusion cuisine that can be found nowhere else, it enjoys patronage from the A-list clientele in Hong Kong.  Featuring four of the best three-star Michelin chefs in the world, you never know what will arrive on your plate the next time you visit us.</p>
-            <p>The restaurant traces its humble beginnings to <em>The Frying Pan</em>, a successful chain started by our CEO, Mr. Peter Pan, that featured for the first time the world's best cuisines in a pan.</p>
+            <p>{{profile.userId.description}}</p>
           </div>
         <div class="card">
           <mat-card>
@@ -45,14 +44,14 @@
       
     <div>
       <mat-card>
-        <!-- <blockquote> -->
+        
           <h4>You better cut the pizza in four pieces because
               I'm not hungry enough to eat six.</h4>
           <footer>-- Yogi Berra,
             <cite>The Wit and Wisdom of Yogi Berra,
               P. Pepe, Diversion Books, 2014</cite>
           </footer>
-        <!-- </blockquote> -->
+        
       </mat-card>
     </div>
     <div class="leaders">
@@ -93,7 +92,7 @@
         <mat-expansion-panel *ngFor="let event of upcomingEvent">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{event.event_name}}
+              {{event.eventName}}
             </mat-panel-title>
             <mat-panel-description>
               Conducted By {{event.organiser}}
@@ -101,7 +100,7 @@
           </mat-expansion-panel-header>
           <p>Event Description</p>
           <p>{{event.description}}</p>
-          <button mat-raised-button color="primary" [routerLink]="['/chapter/event', event.id]">View Details</button>
+          <button mat-raised-button color="primary" [routerLink]="['/chapter/event', event._id]">View Details</button>
         </mat-expansion-panel>
       </mat-accordion>
       <h4>Past Events</h4>
@@ -109,7 +108,7 @@
         <mat-expansion-panel *ngFor="let event of pastEvent">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{event.event_name}}
+              {{event.eventName}}
             </mat-panel-title>
             <mat-panel-description>
               Conducted By {{event.organiser}}
@@ -117,7 +116,7 @@
           </mat-expansion-panel-header>
           <p>Event Description</p>
           <p>{{event.description}}</p>
-          <button mat-raised-button color="primary" [routerLink]="['/chapter/event', event.id]">View Details</button>
+          <button mat-raised-button color="primary" [routerLink]="['/chapter/event', event._id]">View Details</button>
         </mat-expansion-panel>
       </mat-accordion>
   </mat-tab>
@@ -134,19 +133,18 @@
         <div class="loc_text">
           <h4>Our Address</h4>
           <address>
-            IEEE CS<br>
+            {{profile.userId.name}}<br>
             VIT University<br>
             Vellore<br>
-            <i class="fa fa-phone"></i>: +852 1234 5678<br>
-            <i class="fa fa-fax"></i>: +852 8765 4321<br>
+            <i class="fa fa-phone"></i>: +{{profile.userId.phone}}<br>
             <i class="fa fa-envelope"></i>: 
-            <a href="mailto:confusion@food.net">confusion@food.net</a>
+            <a href="mailto:{{profile.userId.email}}">{{profile.userId.email}}</a>
           </address>
           <p></p>
           <div>
-            <a mat-raised-button href="tel:+85212345678"><i class="fa fa-phone"></i> Call</a>
+            <a mat-raised-button href="tel:+{{profile.userId.phone}}"><i class="fa fa-phone"></i> Call</a>
             <a mat-raised-button><i class="fa fa-skype"></i> Skype</a>
-            <a mat-raised-button href="mailto:confusion@food.net"><i class="fa fa-envelope-o"></i> Email</a>
+            <a mat-raised-button href="mailto:{{profile.userId.email}}"><i class="fa fa-envelope-o"></i> Email</a>
           </div>
         </div>
         <div class="map"> 

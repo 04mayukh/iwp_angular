@@ -32,7 +32,7 @@
             <button mat-button *ngIf="event.liked" (click)="liked(event._id,i)">LIKED</button>
             <button mat-button *ngIf="!event.liked" (click)="liked(event._id,i)">LIKE</button >
             <button mat-button [routerLink]="['/user/event', event.eventId]">More Details</button>
-            <button mat-button>Register</button>
+            <button mat-button (click)="register(event.eventId)">Register</button>
             <span class="flex-spacer"></span>
           </mat-card-actions>
         </mat-card>

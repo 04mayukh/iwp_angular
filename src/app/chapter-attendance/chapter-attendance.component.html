@@ -1,10 +1,10 @@
 <mat-tab-group color="primary" backgroundColor="primary">
   <mat-tab label="Attendance History">
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let event of events">
+      <mat-expansion-panel *ngFor="let event of pastEvents">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{event.event_name}}
+            {{event.eventName}}
           </mat-panel-title>
           <mat-panel-description>
             Conducted By {{event.organiser}}
@@ -18,10 +18,10 @@
   </mat-tab>
   <mat-tab label="Attendance Update">
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let event of events">
+      <mat-expansion-panel *ngFor="let event of upcomingEvents">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{event.event_name}}
+            {{event.eventName}}
           </mat-panel-title>
           <mat-panel-description>
             Conducted By {{event.organiser}}

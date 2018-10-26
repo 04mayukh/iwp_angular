@@ -58,7 +58,7 @@
                       </p>
                       <p>
                           <mat-form-field class="full-width">
-                            <textarea matInput formControlName="description" placeholder="Your Feedback" rows=12></textarea>
+                            <textarea matInput formControlName="description" placeholder="Event Description" rows=12></textarea>
                             <mat-error *ngIf="formErrors.description">{{formErrors.description}}</mat-error>
                           </mat-form-field>
                         </p>
@@ -72,12 +72,18 @@
         <div class="event-form">
         <form class="eventForm" novalidate [formGroup]="loginForm" #lform="ngForm" (ngSubmit)="onFeedSubmit()">
             <p>
-                <mat-select placeholder="Category" formControlName="event_id" required>
+                <mat-select placeholder="Events" formControlName="event" required>
                     <mat-option *ngFor="let ctype of eventfeed" [value]="ctype._id">
-                      {{ ctype.event_name }}
+                      {{ ctype.eventName }}
                     </mat-option>
                   </mat-select>
                   <mat-error *ngIf="formErrorsfeed.event_id">{{formErrorsfeed.event_id}}</mat-error>
+            </p>
+            <p>
+              <mat-form-field class="input-align">
+                <input matInput formControlName="name" placeholder="Feed Name" type="text" [errorStateMatcher]="matcher" required>
+                <mat-error *ngIf="formErrors.name">{{formErrors.name}}</mat-error>
+              </mat-form-field>
             </p>
             <p>
                 <mat-form-field class="full-width">

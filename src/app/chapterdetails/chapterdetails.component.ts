@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FeedbackService } from '../services/feedback.service';
 import { ContactType } from '../shared/contact';
 import { Location } from '@angular/common';
+import { Restangular } from 'ngx-restangular';
 
 import {ErrorStateMatcher} from '@angular/material/core';
 import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
@@ -65,7 +66,7 @@ export class ChapterdetailsComponent implements OnInit {
 
 
 
-  constructor(private eventdetailservice: EventdetailService,private route: ActivatedRoute,private fb: FormBuilder, private feedbackservice: FeedbackService,private location: Location, private chapterservice: ChaptersService) { 
+  constructor(private eventdetailservice: EventdetailService,private route: ActivatedRoute,private fb: FormBuilder, private feedbackservice: FeedbackService,private location: Location, private chapterservice: ChaptersService,private restangular: Restangular) { 
     this.createForm();
   }
 
@@ -119,12 +120,26 @@ export class ChapterdetailsComponent implements OnInit {
   chapter: any;
   upcomingEvents: any;
   pastEvents: any;
+  orgbool: any = false;
+  userbool: any = false;
   ngOnInit() {
     console.log("lol");
     const id = this.route.snapshot.params['id'];
     this.chapterservice.getChapterById(id).subscribe((data) => {
       this.chapter = data.organization;
-      console.log(this.chapter)
+      console.log(this.chapter);
+
+      this.restangular.one("api/all/role").get().subscribe((data) => {
+        console.log(data);
+        if(data.role == 'organization'){
+          this.orgbool = true;
+          console.log("haha");
+          console.log(this.userbool)
+        }
+        else{
+          this.userbool = true;
+        }
+      })
 
       this.eventdetailservice.getEventsByChapter(id).subscribe(events => 
         {

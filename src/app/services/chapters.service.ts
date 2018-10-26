@@ -17,4 +17,8 @@ export class ChaptersService {
     // customGET("messages", {param: "myParam"});
     return this.restangular.one('api/common/organization/'+ id).get();
   }
+
+  getChapterProfile(): Observable<any>{
+    return this.restangular.one('api/organization/details').get();
+  }
 }

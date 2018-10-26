@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfileService } from '../services/profile.service';
+import { ChaptersService } from '../services/chapters.service'
 import { FeedbackService } from '../services/feedback.service'
+import { EventdetailService } from '../services/eventdetail.service'
 
 @Component({
   selector: 'app-chapter-profile',
@@ -14,12 +15,21 @@ export class ChapterProfileComponent implements OnInit {
   upcomingEvent: any;
   feedbacks: any;
 
-  constructor(private profileservice: ProfileService, private feedbackservice: FeedbackService) { }
+  constructor(private chapterservice: ChaptersService,private eventdetailservice: EventdetailService, private feedbackservice: FeedbackService) { }
 
   ngOnInit() {
-    this.profileservice.getProfile().subscribe(profile => this.profile=profile);
-    this.profileservice.getPastEvent().subscribe(pastevent => {this.pastEvent=pastevent;console.log(this.pastEvent)});
-    this.profileservice.getFutureEvent().subscribe(upcomingEvent => this.upcomingEvent=upcomingEvent);
+    this.chapterservice.getChapterProfile().subscribe((data) => {
+      this.profile = data.organization;
+      console.log(this.profile);
+      const id = this.profile.userId._id;
+      console.log(id)
+      this.eventdetailservice.getEventsByChapter(id).subscribe((data) =>{
+        this.upcomingEvent = data.upcomingEvents;
+        this.pastEvent = data.conductedEvents;
+        console.log(this.upcomingEvent);
+        console.log(this.pastEvent);
+      })
+    })
     this.feedbackservice.getFeedback().subscribe((result) => this.feedbacks = result);
   }
 

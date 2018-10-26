@@ -30,4 +30,12 @@ export class FeedComponent implements OnInit {
     })
   }
 
+
+  register(id:any){
+    console.log(id);
+    this.restangular.all("api/events/"+id+"/register").post().subscribe((data) => {
+      console.log(data)
+    })
+  }
+
 }
