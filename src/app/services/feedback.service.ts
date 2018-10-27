@@ -11,12 +11,12 @@ export class FeedbackService {
   constructor(private restangular:Restangular ) { }
 
   
-  submitFeedback(feedback: any): Observable<any>{
-    console.log(feedback);
-    return of(feedback);
-  };
+  // submitFeedback(feedback: any): Observable<any>{
+  //   console.log(feedback);
+  //   return of(feedback);
+  // };
 
   getFeedback(): Observable<any>{
-    return of(FEEDBACK);
+    return this.restangular.one('/api/organization/get-feedback').get()
   }
 }

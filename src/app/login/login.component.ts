@@ -78,23 +78,29 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  submit:any = false;
+  invalid: any = false;
   onSubmit() {
+    this.submit=true;
     this.loginData = this.loginForm.value;
     console.log(this.loginData)
     this.restangular.all('api/auth/login').post(this.loginData).subscribe(data =>{
       console.log("SUccessssss");
       console.log(data.user);
-      // this.restangular.one('api/posts/view-post').get().subscribe(data => {
-      //   console.log("data coming");
-      //   console.log(data.posts);
-      // })
       if(data.user.role == 'student'){
         this.router.navigate(['/', 'user']);
       }
-      if(data.user.role == 'organization'){
+      else if(data.user.role == 'organization'){
         this.router.navigate(['/', 'chapter']);
       }
+      this.submit = false;
+
       
+    }, errorResponse => {
+      console.log("Error with status code", errorResponse.status);
+      this.submit=false;
+      this.invalid = true
     });
     this.loginForm.reset();
     this.feedbackFormDirective.resetForm();    

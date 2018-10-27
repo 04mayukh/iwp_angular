@@ -25,6 +25,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+
 
 
 
@@ -115,6 +120,9 @@ import { GoogleAuthComponent } from './google-auth/google-auth.component';
     MatTableModule,
     MatStepperModule,
     SocialLoginModule,
+    MatBadgeModule,
+    MatProgressBarModule,
+    MatSnackBarModule,
     RestangularModule.forRoot(RestangularConfigFactory)
   ],
   providers: [FeedService,ProfileService,EventdetailService,FeedbackService,{provide: 'BaseURL', useValue: baseURL},{

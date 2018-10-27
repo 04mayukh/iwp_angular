@@ -18,6 +18,9 @@
             <button type="submit" [disabled]="loginForm.invalid" mat-button class="background-primary text-floral-white align">Submit</button>
           </p>
           </form>
-  </div>
+          <mat-progress-bar *ngIf="submit" mode="indeterminate" color="accent"></mat-progress-bar>
+          <p *ngIf="invalid" class="reg">User doesn't exist</p>
+          <p class="reg" routerLink="/register"><a>Register</a></p>
+    </div>
 </div>
 

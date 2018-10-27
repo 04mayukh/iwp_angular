@@ -15,7 +15,11 @@ export class MainViewChapterComponent implements OnInit {
   constructor( private chapterservice:ChaptersService) { }
 
   ngOnInit() {
-    // this.chapterservice.getProfile().subscribe(profile => {this.profile=profile;this.name = this.profile.user.name;});
+    this.chapterservice.getChapterProfile().subscribe(profile => {
+      this.profile=profile;
+      console.log(this.profile.organization)
+      this.name = this.profile.organization.userId.name;
+    });
   }
   
 

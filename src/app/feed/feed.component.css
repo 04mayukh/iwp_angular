@@ -2,9 +2,26 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    width: 80%;
+    margin: 0px auto
 }
 .card{
     display: block;
-    width: 80%;
-    margin: 30px auto
+    width: 90%;
+    margin: 10px auto
+}
+
+@media screen and (max-width: 600px){
+    .card-holder{
+        width: 95%;
+        margin: 0px;
+    }
+    .mat-button{
+        padding: 0px;
+    }
+    .card{
+        width: 100%;
+    }
+
+
 }

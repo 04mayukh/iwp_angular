@@ -8,6 +8,7 @@ import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
 import { NeweventService } from '../services/newevent.service';
 import { EventdetailService } from '../services/eventdetail.service';
 import { Restangular } from 'ngx-restangular';
+import {MatSnackBar} from '@angular/material';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -109,10 +110,17 @@ export class CreateEventComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder, private neweventservice: NeweventService, private chapterservice: ChaptersService, private eventdetailservice: EventdetailService, private restangular: Restangular) {
+  constructor(private fb: FormBuilder, private neweventservice: NeweventService, private chapterservice: ChaptersService, private eventdetailservice: EventdetailService, private restangular: Restangular, public snackBar: MatSnackBar) {
     this.createEventForm();
     this.createFeedForm();
    }
+
+
+   openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+    });
+  }
 
   createEventForm(){
     this.eventForm = this.fb.group({
@@ -193,22 +201,34 @@ export class CreateEventComponent implements OnInit {
   //   console.log(this.selectedFile)
   // }
 
+  successUpload: any = false;
   onSubmit() {
+    this.successUpload = true
     this.event = this.eventForm.value;
     this.eventForm.reset();
     this.feedbackFormDirective.resetForm();
     console.log(this.event);
-    this.neweventservice.submitEvent(this.event).subscribe((data) => console.log(data));
+    this.neweventservice.submitEvent(this.event).subscribe((data) => {
+      console.log(data);
+      this.successUpload = false;
+      this.openSnackBar("Event Created", ";)")
+    });
   }
+  
 
   onFeedSubmit() {
+    this.successUpload = true
     const date: Date = new Date();
     this.newFeed = this.loginForm.value;
     this.newFeed.date = date.toISOString();
     console.log(this.newFeed)
     this.loginForm.reset();
     this.feedFormDirective.resetForm();
-    this.restangular.all('api/posts/write-post').post(this.newFeed).subscribe((data) => console.log(data))
+    this.restangular.all('api/posts/write-post').post(this.newFeed).subscribe((data) => {
+      console.log(data);
+      this.successUpload = false;
+      this.openSnackBar("Feed Created", ";)")
+    })
   }
 
   profile: any;

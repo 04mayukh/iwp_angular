@@ -162,6 +162,7 @@ export class RegisterComponent implements OnInit {
       this.chapter = true;
       this.stud = false;
       this.facul = false;
+      this.formErrors.email = '',
       this.registerForm = this.fb.group(this.organisation);
       this.registerForm.patchValue({'role':cat})
       console.log(this.registerForm.value);
@@ -171,6 +172,7 @@ export class RegisterComponent implements OnInit {
       this.facul = true;
       this.stud = false;
       this.chapter= false;
+      this.formErrors.email = '',
       this.registerForm = this.fb.group(this.faculty);
       this.registerForm.patchValue({'role':cat})
       console.log(this.registerForm.value);
@@ -196,14 +198,19 @@ export class RegisterComponent implements OnInit {
     this.registerForm.reset();
   }
 
+  try: any = false;
   onSubmit(){
     console.log(this.registerForm.value);   
     this.restangular.all('api/auth/register').post(this.registerForm.value).subscribe((data) => {
       this.registerForm.reset();
+      this.try = true;
       if(data.success){
         this.register = true
       } 
       console.log(data)
+    },errorResponse => {
+      console.log("Error with status code", errorResponse.message);
+      this.try = true
     })
   }
 
@@ -230,22 +237,24 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
   google: any = false
+  error: any = false
   public socialSignIn(socialPlatform : string) {
     console.log("haha");
     let socialPlatformProvider;
 
-      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
-    
+    socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (userData) => {
         var formMail = this.registerForm.value.email;
         console.log(formMail)
+        console.log(userData.email)
         if(formMail == userData.email){
           this.google = true
-          console.log("haha");
           console.log(socialPlatform+" sign in data : " , userData);
-          this.socialAuthService.signOut()
         } 
+        this.error= true
+        this.socialAuthService.signOut().then(()=> console.log("lolls"))
       }
     );
   }

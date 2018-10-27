@@ -1,1 +1,1 @@
-export const ContactType = ['None', 'Tel', 'Email'];
+export const ContactType = ['Tel', 'Email'];

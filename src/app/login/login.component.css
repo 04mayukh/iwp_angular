@@ -1,3 +1,7 @@
+*{
+    margin: 0;
+}
+
 .login{
     background: url("../../assets/images/form_bg.png");
     background-position: center;
@@ -26,4 +30,12 @@ p > *{
 
 ::selection{
     background: white !important
+}
+
+.reg{
+    text-align: center;
+}
+.reg:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }

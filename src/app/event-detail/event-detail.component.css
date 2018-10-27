@@ -1,3 +1,7 @@
+*{
+    margin: 0;
+}
+
 .detail_desc{
     display: flex;
     justify-content: space-around;
@@ -15,8 +19,31 @@
 
 .comment-form {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-direction: row;
   }
+p{
+    padding: 10px 20px;
+}
 
+  @media screen and (max-width: 600px){
+      .detail_desc{
+          flex-direction: column;
+          width: 100%;
+      }
+      .col{
+          width: 100%;
+          padding: 10px 0px;
+      }
+      .comment-form{
+          flex-direction: column;
+      }
+
+      p>*{
+          width: 80%;
+      }
+      p>mat-slider {
+          width: 60%;
+      }
+  }
 

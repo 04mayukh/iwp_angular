@@ -1,8 +1,7 @@
 <mat-tab-group>
     <mat-tab label="New Event">
 
-        <p>{{ eventForm.value | json }} {{ eventForm.status | json }}</p>
-
+        <!-- <p>{{ eventForm.value | json }} {{ eventForm.status | json }}</p> -->
 
       <div class="event-form">
         <form class="eventForm" novalidate [formGroup]="eventForm" #eventform="ngForm" (ngSubmit)="onSubmit()">
@@ -64,11 +63,12 @@
                         </p>
             <button type="submit" [disabled]="eventForm.invalid" mat-button class="background-primary text-floral-white">Submit</button>
           </form>
+          <mat-progress-bar class="lol" *ngIf="successUpload" mode="buffer"></mat-progress-bar>
       </div>
 
     </mat-tab>
     <mat-tab label="New Feed"> 
-        <p>{{ loginForm.value | json }} {{ loginForm.status | json }}</p>
+        <!-- <p>{{ loginForm.value | json }} {{ loginForm.status | json }}</p> -->
         <div class="event-form">
         <form class="eventForm" novalidate [formGroup]="loginForm" #lform="ngForm" (ngSubmit)="onFeedSubmit()">
             <p>
@@ -82,7 +82,7 @@
             <p>
               <mat-form-field class="input-align">
                 <input matInput formControlName="name" placeholder="Feed Name" type="text" [errorStateMatcher]="matcher" required>
-                <mat-error *ngIf="formErrors.name">{{formErrors.name}}</mat-error>
+                <mat-error *ngIf="formErrorsfeed.name">{{formErrorsfeed.name}}</mat-error>
               </mat-form-field>
             </p>
             <p>
@@ -97,6 +97,8 @@
              <p>
               <button type="submit" [disabled]="loginForm.invalid" mat-button class="background-primary text-floral-white align">Submit</button>
             </p>
+            <br>
+            <mat-progress-bar class="lol" *ngIf="successUpload" mode="buffer"></mat-progress-bar>
             </form>
             </div>
      </mat-tab>

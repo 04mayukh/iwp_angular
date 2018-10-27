@@ -1,12 +1,12 @@
-
+<!-- 
 <div class="attendance" *ngIf="created">
     <p>{{ attendanceForm.value | json }}</p>
-</div>
-
+</div> -->
+<mat-progress-bar mode="indeterminate" *ngIf="!created" color="accent"></mat-progress-bar>
 <mat-card class="example-card" *ngIf="created">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Event Name</mat-card-title>
+      <mat-card-title>{{event.eventName}}</mat-card-title>
       <mat-card-subtitle>Attendance</mat-card-subtitle>
     </mat-card-header>
     <mat-divider></mat-divider>
@@ -17,9 +17,10 @@
               <mat-slide-toggle formControlName="{{participant.userId}}"></mat-slide-toggle>
             <p>
               <br>
-              <button type="submit" mat-stroked-button color="accent">Submit</button>
+              <button style="margin:auto;display:block" type="submit" mat-stroked-button color="accent">Submit</button>
             </p>
         </form>
+        <mat-progress-bar class="lol" *ngIf="successUpload" mode="buffer"></mat-progress-bar>
     </mat-card-content>
     <!-- <mat-card-actions>
       

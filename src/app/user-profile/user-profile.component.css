@@ -64,3 +64,9 @@ h4:nth-child(1){
 mat-panel-description{
     justify-content: flex-end
 }
+
+@media screen and (max-width: 600px){
+    .profile-head{
+        margin-left: -10px;
+    }
+}

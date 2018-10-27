@@ -16,7 +16,7 @@
   }
   
   .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-image: url('../../assets/images/chapter.png');
     background-size: cover;
   }
 
@@ -30,4 +30,10 @@
       padding: 0px 20px;
       margin: 10px 0px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  }
+
+  .lol{
+      display: block;
+      width: 60%;
+      margin: 10px auto
   }

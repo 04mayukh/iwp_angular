@@ -1,4 +1,5 @@
-<mat-tab-group color="primary" >
+<mat-progress-bar mode="indeterminate" *ngIf="!profile" color="accent"></mat-progress-bar>
+<mat-tab-group color="primary" *ngIf="profile">
   <mat-tab>
     <ng-template mat-tab-label>
       <mat-icon class="example-tab-icon">local_library</mat-icon>
@@ -8,7 +9,7 @@
     </div>
       <div class="profile-header">
         <div class="profile-img"><img src="../../assets/images/alberto.png" height="150px" width="150px"></div>
-        <div class="profile-head"><h4>{{profile.userId.name}}</h4><h4>{{profile.domain}}</h4></div>
+        <div class="profile-head"><h4 style="color:white">{{profile.userId.name}}</h4><h4>{{profile.domain}}</h4></div>
       </div>
     <div>
       <div>
@@ -43,7 +44,7 @@
     </div>
       
     <div>
-      <mat-card>
+      <mat-card class="motto">
         
           <h4>You better cut the pizza in four pieces because
               I'm not hungry enough to eat six.</h4>
@@ -55,7 +56,7 @@
       </mat-card>
     </div>
     <div class="leaders">
-        <h3>Corporate Leadership</h3>
+        <h3>Board Members</h3>
         <mat-list>
             <mat-list-item >
                     <img matListAvatar src="../../assets/images/alberto.png" alt="fgsd">
@@ -87,7 +88,10 @@
       <mat-icon class="example-tab-icon">school</mat-icon>
       Events
     </ng-template>
-    <h4>Upcoming Events</h4>
+    <p class="head" *ngIf="upcomingEvent">
+      Upcoming Events
+      <mat-icon  matBadge="{{upcomingEvent.length}}" matBadgeColor="accent">school</mat-icon>
+    </p>
     <mat-accordion>
         <mat-expansion-panel *ngFor="let event of upcomingEvent">
           <mat-expansion-panel-header>
@@ -103,7 +107,10 @@
           <button mat-raised-button color="primary" [routerLink]="['/chapter/event', event._id]">View Details</button>
         </mat-expansion-panel>
       </mat-accordion>
-      <h4>Past Events</h4>
+      <p class="head" *ngIf="pastEvent">
+        Past Events
+        <mat-icon matBadge="{{pastEvent.length}}" matBadgeColor="accent">school</mat-icon>
+      </p>
       <mat-accordion>
         <mat-expansion-panel *ngFor="let event of pastEvent">
           <mat-expansion-panel-header>
@@ -130,21 +137,20 @@
     <div class="container" fxLayout="column"  fxLayoutGap="10px">
     <div>
       <div class="location">
-        <div class="loc_text">
+        <div class="loc_text pad">
           <h4>Our Address</h4>
           <address>
-            {{profile.userId.name}}<br>
-            VIT University<br>
-            Vellore<br>
+            <p>{{profile.userId.name}}</p>
+            <p>VIT University</p>
+            <p>Vellore</p><br>
             <i class="fa fa-phone"></i>: +{{profile.userId.phone}}<br>
             <i class="fa fa-envelope"></i>: 
             <a href="mailto:{{profile.userId.email}}">{{profile.userId.email}}</a>
           </address>
           <p></p>
-          <div>
-            <a mat-raised-button href="tel:+{{profile.userId.phone}}"><i class="fa fa-phone"></i> Call</a>
-            <a mat-raised-button><i class="fa fa-skype"></i> Skype</a>
-            <a mat-raised-button href="mailto:{{profile.userId.email}}"><i class="fa fa-envelope-o"></i> Email</a>
+          <div class="contact-btn">
+            <a mat-stroked-button color="accent" href="tel:+{{profile.userId.phone}}"><i class="fa fa-phone"></i> Call</a>
+            <a mat-stroked-button color="accent" href="mailto:{{profile.userId.email}}"><i class="fa fa-envelope-o"></i> Email</a>
           </div>
         </div>
         <div class="map"> 
@@ -168,11 +174,11 @@
                   <span>{{feedback.firstname}} {{feedback.lastname}}</span>
                 </p>
                 <p>
-                  <span><i class="material-icons">
+                  <span *ngIf="feedback.contactMethod == 'Tel'"><i class="material-icons">
                       call
                       </i>{{feedback.telnum}}
                     </span>
-                    <span><i class="material-icons">
+                    <span *ngIf="feedback.contactMethod == 'Email'"><i class="material-icons">
                           mail_outline
                           </i> {{feedback.email}}
                   </span>
@@ -200,6 +206,6 @@
   </mat-list>-->
   </mat-tab> 
 </mat-tab-group>
-<div style="display:flex;justify-content:center">
+<div *ngIf="profile" style="display:flex;justify-content:center">
   <button mat-stroked-button color="accent" (click)="goBack()">BACK</button>
 </div>

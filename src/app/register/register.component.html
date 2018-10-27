@@ -25,7 +25,7 @@
                       </p>
                       <p>
                           <mat-form-field class="input-align" *ngIf="stud">
-                            <input matInput formControlName="email" placeholder="Email" type="text" [errorStateMatcher]="matcher" required pattern="[a-zA-Z0-9.]+@vitstudent.ac.in">
+                            <input matInput formControlName="email" placeholder="VIT Email" type="text" [errorStateMatcher]="matcher" required pattern="[a-zA-Z0-9.]+@vitstudent.ac.in">
                             <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
                           </mat-form-field>
                         </p>
@@ -117,12 +117,13 @@
                                 </mat-form-field>
                               </p>
                       </div>
-                      <button class="log" mat-stroked-button color="accent" *ngIf="!google" (click)="socialSignIn('google')" [disabled]="registerForm.invalid">Verify VIT ID</button>
+                      <button class="log" type="button" mat-stroked-button color="accent" *ngIf="!google" (click)="socialSignIn('google')" [disabled]="registerForm.invalid">Verify VIT ID</button>
                       
                       <button class="log" mat-button matStepperNext type="submit" [disabled]="registerForm.invalid"  class="background-primary text-floral-white align" *ngIf="google">Submit</button>
-                      
+                      <button class="log" mat-button matStepperNext type="submit" [disabled]="registerForm.invalid"  class="background-primary text-floral-white align" *ngIf="!stud">Submit</button>                      
                     </fieldset>
                   </form>
+                  <p *ngIf="error && !google">Not a valid VIT ID</p>
                       <!-- <p>{{ registerForm.value | json }}</p> -->
                 </div>
               </div>
@@ -130,11 +131,12 @@
         </mat-step>
         <mat-step>
           <ng-template matStepLabel>Done</ng-template>
-          <p *ngIf="register">You are successfully registered.</p>
-          <p *ngIf="!register">Registration Failed</p>
+          <mat-progress-bar *ngIf="!try" mode="indeterminate" color="accent"></mat-progress-bar>
+          <p *ngIf="register && try">You are successfully registered.</p>
+          <p *ngIf="!register && try">Registration Failed</p>
           <div>
-            <button *ngIf="register" mat-stroked-button color="primary" routerLink="/login" (click)="stepper.reset()">Login</button>
-            <button *ngIf="!register" mat-stroked-button color="primary" (click)="stepper.reset()">Retry</button>
+            <button *ngIf="register && try" mat-stroked-button color="primary" routerLink="/login" (click)="stepper.reset()">Login</button>
+            <button *ngIf="!register && try" mat-stroked-button color="primary" (click)="stepper.reset()">Retry</button>
           </div>
         </mat-step>
       </mat-horizontal-stepper>

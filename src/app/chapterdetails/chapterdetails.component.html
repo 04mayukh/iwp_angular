@@ -1,3 +1,4 @@
+<mat-progress-bar mode="indeterminate" *ngIf="!chapter" color="accent"></mat-progress-bar>
 <mat-tab-group color="primary" *ngIf="chapter">
     <mat-tab>
       <ng-template mat-tab-label>
@@ -8,7 +9,7 @@
       </div>
         <div class="profile-header">
           <div class="profile-img"><img src="../../assets/images/alberto.png" height="150px" width="150px"></div>
-          <div class="profile-head"><h4>{{chapter.userId.name}}</h4><h4>{{chapter.domain}}</h4></div>
+          <div class="profile-head"><h4 style="color:white">{{chapter.userId.name}}</h4><h4>{{chapter.domain}}</h4></div>
         </div>
       <div>
         <div>
@@ -43,7 +44,7 @@
       </div>
         
       <div>
-        <mat-card>
+        <mat-card class="motto">
           <!-- <blockquote> -->
             <h4>You better cut the pizza in four pieces because
                 I'm not hungry enough to eat six.</h4>
@@ -55,7 +56,7 @@
         </mat-card>
       </div>
       <div class="leaders">
-          <h3>Corporate Leadership</h3>
+          <h3>Board Members</h3>
           <mat-list>
               <mat-list-item >
                       <img matListAvatar src="../../assets/images/alberto.png" alt="fgsd">
@@ -87,24 +88,30 @@
         <mat-icon class="example-tab-icon">school</mat-icon>
         Events
       </ng-template>
-      <h4>Upcoming Events</h4>
+      <p class="head" *ngIf="upcomingEvents">
+        Upcoming Events
+        <mat-icon  matBadge="{{upcomingEvents.length}}" matBadgeColor="accent">school</mat-icon>
+      </p>
       <mat-accordion>
-          <mat-expansion-panel *ngFor="let event of upcomingEvents">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                {{event.eventName}}
-              </mat-panel-title>
-              <mat-panel-description>
-                Conducted By {{event.organiser}}
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <p>Event Description</p>
-            <p>{{event.description}}</p>
-            <button mat-raised-button color="primary" [routerLink]="['/user/event', event._id]" *ngIf="userbool">Vie Details</button>
-            <button mat-raised-button color="primary" [routerLink]="['/chapter/event', event._id]" *ngIf="orgbool">View Details</button>
-          </mat-expansion-panel>
+        <mat-expansion-panel *ngFor="let event of upcomingEvents">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{event.eventName}}
+            </mat-panel-title>
+            <mat-panel-description>
+              Conducted By {{event.organiser}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>Event Description</p>
+          <p>{{event.description}}</p>
+          <button mat-raised-button color="primary" [routerLink]="['/user/event', event._id]" *ngIf="userbool">Vie Details</button>
+          <button mat-raised-button color="primary" [routerLink]="['/chapter/event', event._id]" *ngIf="orgbool">View Details</button>
+        </mat-expansion-panel>
       </mat-accordion>
-      <h4>Past Events</h4>
+      <p class="head" *ngIf="pastEvents">
+        Past Events
+        <mat-icon matBadge="{{pastEvents.length}}" matBadgeColor="accent">school</mat-icon>
+      </p>
       <mat-accordion>
         <mat-expansion-panel *ngFor="let event of pastEvents">
           <mat-expansion-panel-header>
@@ -121,6 +128,7 @@
           <button mat-raised-button color="primary" [routerLink]="['/chapter/event', event._id]" *ngIf="orgbool">View Details</button>
         </mat-expansion-panel>
       </mat-accordion>
+
     </mat-tab>
   
     <mat-tab>
@@ -129,28 +137,23 @@
         Contact
       </ng-template>
   
-      <div class="container"
-  fxLayout="column"
-  fxLayoutGap="10px">
-
-
+  <div class="container" fxLayout="column" fxLayoutGap="10px">
   <div>
     <div class="location">
-      <div class="loc_text">
+      <div class="loc_text pad">
         <h4>Our Address</h4>
         <address>
-          {{chapter.userId.name}}<br>
-          VIT University<br>
-          Vellore<br>
+          <p>{{chapter.userId.name}}</p>
+          <p>VIT University</p>
+          <p>Vellore</p><br>
           <i class="fa fa-fax"></i>: +{{chapter.userId.phone}}<br>
           <i class="fa fa-envelope"></i>: 
           <a href="{{chapter.userId.email}}}">{{chapter.userId.email}}</a>
         </address>
         <p></p>
-        <div>
-          <a mat-raised-button href="tel:+{{chapter.userId.phone}}"><i class="fa fa-phone"></i> Call</a>
-          <a mat-raised-button><i class="fa fa-skype"></i> Skype</a>
-          <a mat-raised-button href="mailto:chapter.userId.email"><i class="fa fa-envelope-o"></i> Email</a>
+        <div class="contact-btn">
+          <a mat-stroked-button color="accent" href="tel:+{{chapter.userId.phone}}"><i class="fa fa-phone"></i> Call</a>
+          <a mat-stroked-button color="accent" href="mailto:chapter.userId.email"><i class="fa fa-envelope-o"></i> Email</a>
         </div>
       </div>
       <div class="map"> 
@@ -164,7 +167,7 @@
       <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
   
       <form novalidate *ngIf='!y' [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
-        <p>
+        <!-- <p>
           <mat-form-field class="half-width" >
             <input matInput formControlName="firstname" placeholder="First Name" type="text" [errorStateMatcher]="matcher"  required>
             <mat-error *ngIf="formErrors.firstname">{{formErrors.firstname}}</mat-error>
@@ -183,13 +186,14 @@
             <input matInput formControlName="email" placeholder="Email" type="email" email [errorStateMatcher]="matcher" required>
             <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
           </mat-form-field>
-        </p>
+        </p> -->
         <table class="form-size">
           <td>
-            <mat-slide-toggle formControlName="agree">May we contact you?</mat-slide-toggle>
+            <mat-slide-toggle (click)="contactUs()">May we contact you?</mat-slide-toggle>
           </td>
-          <td>
-            <mat-select placeholder="How?" formControlName="contacttype">
+          <td *ngIf="contact">
+    
+            <mat-select  placeholder="How?" formControlName="contactMethod">
               <mat-option *ngFor="let ctype of contactType" [value]="ctype">
                 {{ ctype }}
               </mat-option>
@@ -221,6 +225,44 @@
     </div>
     </mat-tab>
   </mat-tab-group>
-  <div style="display:flex;justify-content:center">
+  <div *ngIf="chapter" style="display:flex;justify-content:center">
     <button mat-stroked-button color="accent" (click)="goBack()">BACK</button>
   </div>
+
+
+
+
+
+  <!-- <mat-accordion>
+          <mat-expansion-panel *ngFor="let event of upcomingEvents">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{event.eventName}}
+              </mat-panel-title>
+              <mat-panel-description>
+                Conducted By {{event.organiser}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>Event Description</p>
+            <p>{{event.description}}</p>
+            <button mat-raised-button color="primary" [routerLink]="['/user/event', event._id]" *ngIf="userbool">Vie Details</button>
+            <button mat-raised-button color="primary" [routerLink]="['/chapter/event', event._id]" *ngIf="orgbool">View Details</button>
+          </mat-expansion-panel>
+      </mat-accordion>
+      <h4>Past Events</h4>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let event of pastEvents">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{event.eventName}}
+            </mat-panel-title>
+            <mat-panel-description>
+              Conducted By {{event.organiser}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>Event Description</p>
+          <p>{{event.description}}</p>
+          <button mat-raised-button color="primary" [routerLink]="['/user/event', event._id]" *ngIf="userbool">Vie Details</button>
+          <button mat-raised-button color="primary" [routerLink]="['/chapter/event', event._id]" *ngIf="orgbool">View Details</button>
+        </mat-expansion-panel>
+      </mat-accordion> -->

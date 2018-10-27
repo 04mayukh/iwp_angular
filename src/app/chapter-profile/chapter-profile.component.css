@@ -70,10 +70,15 @@ mat-panel-description{
 }
 
 .loc_text,.map{
-    width: 40%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center
+}
+
+.pad{
+    padding-left: 40px;
+    box-sizing: border-box;
 }
 
 .half-width{
@@ -95,3 +100,38 @@ mat-card-title{
     font-size: 15px;
     font-weight: bold
 }
+
+.head{
+    font-size: 17px;
+    margin-top: 15px;
+}
+
+.contact-btn>*{
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.motto{
+
+}
+
+
+
+@media screen and (max-width: 600px){
+    .pad{
+        padding: 5px;
+    }
+    .location{
+        flex-direction: column;
+    }
+    .loc_text,.map{
+        width: 100%;
+    }
+    .flex{
+        flex-direction: column;
+    }
+    .card{
+        width: 100%;
+    }
+}
+

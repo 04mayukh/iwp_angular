@@ -7,6 +7,7 @@ import { FeedbackService } from '../services/feedback.service';
 import { ContactType } from '../shared/contact';
 import { Location } from '@angular/common';
 import { Restangular } from 'ngx-restangular';
+import {MatSnackBar} from '@angular/material';
 
 import {ErrorStateMatcher} from '@angular/material/core';
 import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
@@ -39,7 +40,7 @@ export class ChapterdetailsComponent implements OnInit {
     'firstname': '',
     'lastname': '',
     'telnum': '',
-    'email': ''
+    'message': ''
   };
 
   validationMessages = {
@@ -57,28 +58,27 @@ export class ChapterdetailsComponent implements OnInit {
       'required':      'Tel. number is required.',
       'pattern':       'Tel. number must contain only numbers.'
     },
-    'email': {
-      'required':      'Email is required.',
-      'email':         'Email not in valid format.'
+    'message': {
+      'required':      'Message is required.'
     },
   };
 
 
 
 
-  constructor(private eventdetailservice: EventdetailService,private route: ActivatedRoute,private fb: FormBuilder, private feedbackservice: FeedbackService,private location: Location, private chapterservice: ChaptersService,private restangular: Restangular) { 
+  constructor(private eventdetailservice: EventdetailService,private route: ActivatedRoute,private fb: FormBuilder, private feedbackservice: FeedbackService,private location: Location, private chapterservice: ChaptersService,private restangular: Restangular,public snackBar: MatSnackBar) { 
     this.createForm();
   }
 
   createForm(){
     this.feedbackForm = this.fb.group({
-      firstname: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(25)]],
-      lastname: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(25)]],
-      telnum: ['', [Validators.required,Validators.pattern]],
-      email: ['', [Validators.required,Validators.email]],
-      agree: false,
-      contacttype: 'None',
-      message: ''
+      // firstname: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(25)]],
+      // lastname: ['', [Validators.required,Validators.minLength(2),Validators.maxLength(25)]],
+      // telnum: ['', [Validators.required,Validators.pattern]],
+      // email: ['', [Validators.required,Validators.email]],
+      // agree: false,
+      contactMethod: 'None',
+      message: ['', [Validators.required]]
     });
 
     this.feedbackForm.valueChanges.subscribe(data => this.onValueChanged(data));
@@ -107,11 +107,20 @@ export class ChapterdetailsComponent implements OnInit {
   }
 
   onSubmit() {
-    this.y=1;
+    const id = this.route.snapshot.params['id'];
     this.feedback = this.feedbackForm.value;
-    this.feedbackservice.submitFeedback(this.feedback).subscribe(mess => {this.res=mess;console.log(this.res);setTimeout(()=>{this.y=0;this.feedbackForm.reset(); 
-    },1000)});
+    console.log(this.feedback);
+    this.restangular.all('api/common/organization/'+id+'/feedback').post(this.feedback).subscribe((data) => {
+      console.log(data);
+      this.openSnackBar("Feedback Sent", ':)')
+    });
     this.feedbackFormDirective.resetForm(); 
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
   goBack(): void {
@@ -122,6 +131,19 @@ export class ChapterdetailsComponent implements OnInit {
   pastEvents: any;
   orgbool: any = false;
   userbool: any = false;
+  contact: any = false;
+
+  contactUs(){
+    if(this.contact == true){
+      this.contact = false
+      this.feedbackForm.patchValue({contactMethod:'None'})
+    }
+    else{
+      this.contact = true
+    }
+  }
+
+
   ngOnInit() {
     console.log("lol");
     const id = this.route.snapshot.params['id'];
@@ -145,7 +167,9 @@ export class ChapterdetailsComponent implements OnInit {
         {
           console.log(events)
           this.upcomingEvents = events.upcomingEvents;
-          this.pastEvents = events.conductedEvents
+          this.upcomingEvents.length = this.upcomingEvents.length
+          this.pastEvents = events.conductedEvents;
+          this.pastEvents.length = this.pastEvents.length;
           console.log(this.upcomingEvents);
           console.log(this.pastEvents)
         });

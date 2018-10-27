@@ -1,3 +1,4 @@
+<mat-progress-bar mode="indeterminate" *ngIf="!event" color="accent"></mat-progress-bar>
 <div *ngIf="event">
   <h3>{{event.event_name}}</h3>
   <h4><span>Conducted By: {{event.organiser}}</span><br><span>Type: {{event.category}}</span></h4>
@@ -6,12 +7,13 @@
       <img src="../../assets/images/jumble.png" width="100%" style="display:block">
     </div>
     <div class="col">
-        <p>Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum{{event.detail_desc}}</p>
+        <p>{{event.description}}</p>
     </div>
   </div>
 </div>
 
 <mat-list fxFlex *ngIf="event">
+  <h4>Comments</h4>
     <mat-list-item *ngFor="let com of event.comments">
       <h1 matLine> {{com.comment}} </h1>
       <p matLine>
@@ -28,20 +30,22 @@
         <p matLine>
          <span> {{commentForm.get('rating').value}} </span>
         </p>
-        <p matLine>
+        <!-- <p matLine>
           <span>--{{commentForm.get('author').value}}</span>
-         </p>
+         </p> -->
       </mat-list-item>
   </mat-list>
-<p>{{ commentForm.value | json }}</p>
-<form novalidate [formGroup]="commentForm" #cform="ngForm" (ngSubmit)="onSubmit()">
+
+<h6 *ngIf="bool && role && event">Your Comment</h6>
+<form *ngIf="bool && role && event" novalidate [formGroup]="commentForm" #cform="ngForm" (ngSubmit)="onSubmit()">
+    <!-- <p>{{ commentForm.value | json }}</p> -->
   <div class="comment-form">
-    <p>
+    <!-- <p>
       <mat-form-field>
         <input matInput formControlName="author" placeholder="Name" type="text" [errorStateMatcher]="matcher" required>
         <mat-error *ngIf="formErrors.author">{{formErrors.author}}</mat-error>
       </mat-form-field>
-    </p>
+    </p> -->
     <p>
       <span>Rating</span>
       <mat-slider formControlName="rating" step="1" tickInterval="1" thumbLabel tickInterval="1" min="1" max="5" step="1" value="5"></mat-slider>
@@ -55,6 +59,6 @@
   </div>
   <button type="submit" [disabled]="commentForm.invalid" mat-button class="background-primary text-floral-white">Submit</button>
 </form>
-<div style="display:flex;justify-content:center">
+<div *ngIf="event" style="display:flex;justify-content:center">
   <button mat-stroked-button color="accent" (click)="goBack()">BACK</button>
 </div>

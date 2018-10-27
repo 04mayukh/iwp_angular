@@ -54,7 +54,7 @@ export class EventDetailComponent implements OnInit {
     this.commentForm = this.fb.group({
       rating: [5],
       comment: ['', [Validators.required]],
-      author: ['', [Validators.required,Validators.minLength(2)]]
+      author: ['  ', [Validators.required,Validators.minLength(2)]]
     });
 
     this.commentForm.valueChanges.subscribe(data => this.onValueChanged(data));
@@ -81,12 +81,24 @@ export class EventDetailComponent implements OnInit {
     }
   }
 
+  role: any = false;
+  bool: any = true;
   id: any;
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     console.log(this.id);
     // this.eventdetailservice.getEventbyId(id).subscribe(event => {this.event = event.events;console.log(event.events)});
     this.eventdetailservice.getEventbyId(this.id).subscribe(event => {this.event = event.event;console.log(this.event)});
+
+    console.log("called")
+    this.restangular.one("api/all/role").get().subscribe((data) => {
+      console.log(data);
+      this.role = true
+      if(data.role == 'organization'){
+        this.bool = false;
+      }
+    })
+
   }
 
   onSubmit(){

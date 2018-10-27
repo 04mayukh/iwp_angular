@@ -19,18 +19,19 @@ export class MainViewComponent implements OnInit {
   ngOnInit() {
     this.profileservice.getProfile().subscribe(profile => {
       this.profile=profile;
-      this.name = this.profile.user.name;
-      if(this.profile.user.role == "Student"){
-        console.log("csd")
-        this.student=false;
-        console.log(this.student)
-        this.chapter=false;
-      }
-      if(this.profile.user.role == "Chapter"){
-        console.log("dnfcj")
-        this.chapter=true;
-        this.student=false;
-      }
+      console.log(this.profile.user)
+      this.name = this.profile.user.userId.name;
+      // if(this.profile.user.role == "Student"){
+      //   console.log("csd")
+      //   this.student=false;
+      //   console.log(this.student)
+      //   this.chapter=false;
+      // }
+      // if(this.profile.user.role == "Chapter"){
+      //   console.log("dnfcj")
+      //   this.chapter=true;
+      //   this.student=false;
+      // }
     });
   }
   

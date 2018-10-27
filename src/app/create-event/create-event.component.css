@@ -5,9 +5,25 @@
 }
 
 .full-width{
-    width: 60%;
+    width: 100%;
 }
 
 .eventForm{
     width: 80%;
+}
+
+.lol{
+    display: block;
+    width: 60%;
+    margin: 10px auto
+}
+
+@media screen and (max-width: 600px) {
+    .event-form{
+        padding: 10px;
+    }
+
+    .eventForm{
+        width: 100%;
+    }
 }
