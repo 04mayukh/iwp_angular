@@ -22,7 +22,7 @@ export class ChapterProfileComponent implements OnInit {
       this.profile = data.organization;
       console.log(this.profile);
       const id = this.profile.userId._id;
-      this.feedbacks = this.profile.feedback
+      // this.feedbacks = this.profile.feedback
       console.log(id)
       this.eventdetailservice.getEventsByChapter(id).subscribe((data) =>{
         this.upcomingEvent = data.upcomingEvents;
@@ -32,11 +32,11 @@ export class ChapterProfileComponent implements OnInit {
         console.log(this.upcomingEvent);
         console.log(this.pastEvent);
       });
-      // this.feedbackservice.getFeedback().subscribe((data) => {
-      //   console.log(data.feedbacks);
-      //   this.feedbacks = data.feedbacks;
-      //   console.log("hahha")
-      // })
+      this.feedbackservice.getFeedback().subscribe((data) => {
+        console.log(data.feedbacks);
+        this.feedbacks = data.feedbacks;
+        console.log("hahha")
+      })
     })
   }
 

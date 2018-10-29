@@ -174,11 +174,11 @@
                   <span>{{feedback.firstname}} {{feedback.lastname}}</span>
                 </p>
                 <p>
-                  <span *ngIf="feedback.contactMethod == 'Tel'"><i class="material-icons">
+                  <span *ngIf="feedback.contactMethod == 'Tel'"><i class="material-icons place">
                       call
-                      </i>{{feedback.telnum}}
+                      </i>{{feedback.phone}}
                     </span>
-                    <span *ngIf="feedback.contactMethod == 'Email'"><i class="material-icons">
+                    <span *ngIf="feedback.contactMethod == 'Email'"><i class="material-icons place">
                           mail_outline
                           </i> {{feedback.email}}
                   </span>

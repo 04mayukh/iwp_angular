@@ -115,6 +115,11 @@ mat-card-title{
 
 }
 
+.place{
+    position: relative;
+    top:6px
+}
+
 
 
 @media screen and (max-width: 600px){

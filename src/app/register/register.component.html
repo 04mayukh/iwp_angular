@@ -119,7 +119,7 @@
                       </div>
                       <button class="log" type="button" mat-stroked-button color="accent" *ngIf="!google" (click)="socialSignIn('google')" [disabled]="registerForm.invalid">Verify VIT ID</button>
                       
-                      <button class="log" mat-button matStepperNext type="submit" [disabled]="registerForm.invalid"  class="background-primary text-floral-white align" *ngIf="google">Submit</button>
+                      <button class="log" mat-button matStepperNext type="submit" [disabled]="registerForm.invalid"  class="background-primary text-floral-white align" *ngIf="!google">Submit</button>
                       <button class="log" mat-button matStepperNext type="submit" [disabled]="registerForm.invalid"  class="background-primary text-floral-white align" *ngIf="!stud">Submit</button>                      
                     </fieldset>
                   </form>

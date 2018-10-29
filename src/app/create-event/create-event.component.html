@@ -68,6 +68,7 @@
 
     </mat-tab>
     <mat-tab label="New Feed"> 
+        <mat-progress-bar mode="indeterminate" *ngIf="!eventfeed" color="accent"></mat-progress-bar>
         <!-- <p>{{ loginForm.value | json }} {{ loginForm.status | json }}</p> -->
         <div class="event-form">
         <form class="eventForm" novalidate [formGroup]="loginForm" #lform="ngForm" (ngSubmit)="onFeedSubmit()">
